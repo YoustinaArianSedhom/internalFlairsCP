@@ -1,0 +1,102 @@
+:host {
+    display: block;
+    min-width: 35vw;
+}
+
+.uploader-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: block;
+}
+
+:host ::ng-deep {
+    ngx-awesome-uploader {
+        margin: auto !important;
+    }
+
+    .files-preview-wrapper {
+        margin: auto !important;
+    }
+
+    // .svg-icon {
+    //     fill: var(--primary) !important;
+    // }
+
+    .file-browse-button {
+        padding: .5rem 1rem !important;
+        border-radius: 0 !important;
+        background: var(--primary) !important;
+        font-weight: 500 !important;
+        text-transform: capitalize !important;
+    }
+
+    #dropZone {
+        border: 2px dashed var(--primary) !important;
+        background: #EEEEEE !important;
+
+    }
+
+    .content-top-text {
+        color: var(--accentAlt) !important;
+        font-weight: 500 !important;
+    }
+
+    .content-center-text {
+        color: var(--accentAlt) !important;
+    }
+
+    .file-preview-wrapper .file-preview-thumbnail .other-preview-thumbnail {
+        font-weight: 300 !important;
+        // margin: auto;
+    }
+
+    .file-preview-wrapper .file-preview-description .file-preview-title {
+        font-weight: 300 !important;
+        color: var(--accentAlt) !important;
+    }
+
+    .file-preview-wrapper .file-preview-thumbnail {
+        pointer-events: none;
+    }
+
+    .file-preview-wrapper .file-preview-actions .ngx-checkmark-wrapper .ngx-checkmark:after {
+        height: 8px !important;
+        left: 4px !important;
+        top: 5px !important;
+        transform: rotateY(180deg) rotate(45deg) !important;
+        width: 12px !important;
+    }
+
+    .ngx-checkmark-wrapper .ngx-checkmark {
+        cursor: auto;
+    }
+
+    .mat-table {
+        max-height: 300px !important;
+        overflow-y: scroll !important;
+
+        @media screen and (max-width: 767px) {
+            min-width: 100vw;
+        }
+
+        @media screen and (max-width: 568px) {
+            min-width: 120vw;
+        }
+
+        @media screen and (max-width: 380px) {
+            min-width: 150vw;
+        }
+    }
+
+    .file-drop-wrapper,  .ngx-checkmark-wrapper {
+        background: none !important;
+    }
+
+    .file-preview-actions svg {
+        fill: red !important;
+    }
+}

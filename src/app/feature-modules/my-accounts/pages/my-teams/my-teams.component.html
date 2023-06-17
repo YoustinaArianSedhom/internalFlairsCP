@@ -1,0 +1,106 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="w-full p-1 bg-white inner-wrapper lg:p-5">
+      <!-- <div class="flex w-3/5 bg-white mb-7">
+        <div>
+          <img
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+        </div>
+        <div class="w-full p-4 bg-white lg:p-4">
+          <h3>Valsoft</h3>
+          <p>...</p>
+          <h4>Description</h4>
+        </div>
+      </div> -->
+      <!--Search Input And Filters-->
+      <!-- <ssa-cards-wrapper-my-teams></ssa-cards-wrapper-my-teams> -->
+      <div>
+        <div class="flex justify-end items-baseline mb-7">
+          <!-- <button
+            (click)="showFilters = !showFilters"
+            mat-flat-button
+            color="warn"
+            aria-label="Filter"
+            class="iconBtn"
+          >
+            <mat-icon>filter_alt</mat-icon>
+          </button> -->
+          <!-- Filters Wrapper -->
+        </div>
+        <div
+          class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex">
+          <!-- Filters Inner Wrapper -->
+          <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon>
+            <app-search-input maxlength="100" [withResult]="false"
+            (searchChange)="fireSearchMyTeamsBySearch($event)"
+            class="flex-grow filterBox-search"
+            [isMobileScreen]="isMobile"
+            placeholder="Search by Name"
+            [shouldSearchInputUpdate]="resetSearch"
+          ></app-search-input>
+          </div>
+            <!--Task Status-->
+            <div class="flex md:flex-nowrap flex-wrap justify-end items-baseline">
+              <app-filter-menu label="Skills" [count]="skillsSelected$ | async" [isClearEnable]="isSkillsSelected" (clearClick)="fireFilterBySkills([])">
+            <My-Accounts-skills-auto-complete
+              class="px-5 block"
+              [isEmptyList]="isSkillsSelected ? false : true"
+              (ListOfSkills)="fireFilterBySkills($event)"
+              [teamChanged]="teamChanged"
+            ></My-Accounts-skills-auto-complete></app-filter-menu>
+
+            <app-filter-menu #portfolioFilter label="Portfolio" [isClearEnable]="isPortfolioSelected" (clearClick)="fireFilterByPortfolio(-1)">
+              <app-basic-select
+              class="px-5 block"
+              [emitPassedValue]="false"
+              [options]="portfolios$ | async"
+              [config]="taskPortfolioSelectConfig"
+              (optionsChange)="fireFilterByPortfolio($event);portfolioFilter.menu.closeMenu()"
+              label="Filter by Portfolio"
+            >
+            </app-basic-select></app-filter-menu>
+
+            <app-filter-menu #teamFilter label="Platform" [isClearEnable]="isTeamsSelected" (clearClick)="fireFilterByTeams('')">
+              <app-basic-select
+              class="px-5 block"
+              [emitPassedValue]="false"
+              [options]="teams$ | async"
+              [config]="teamskSelectConfig"
+              [optionTemplate]=""
+              [disable]="!isPortfolioSelected"
+              (optionsChange)="fireFilterByTeams($event);teamFilter.menu.closeMenu()"
+              label="Filter by Platform"
+            >
+            </app-basic-select></app-filter-menu>
+
+            <app-filter-menu #statusFilter label="Status" [isClearEnable]="isStatusSelected" (clearClick)="fireFilterByStatus(-5)">
+              <app-basic-select
+              class="px-5 block"
+              [emitPassedValue]="false"
+              [options]="teamsStatusOptions"
+              [config]="teamsStatusSelectConfig"
+              (optionsChange)="fireFilterByStatus($event);statusFilter.menu.closeMenu()"
+              label="Filter by Status"
+            >
+            </app-basic-select></app-filter-menu>
+
+            <button (click)="resetFilter()" mat-button color="warn"
+            aria-label="Clear Filter" class="iconBtn">
+            Clear
+          </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <ssa-table-my-teams></ssa-table-my-teams>
+      </ng-container>
+
+    
+    </div>
+  </ng-container>
+</app-inner-page-layout>

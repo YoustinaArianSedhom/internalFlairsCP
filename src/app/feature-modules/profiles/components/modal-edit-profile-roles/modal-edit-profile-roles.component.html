@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Edit Profile Roles</h1>
+<mat-divider></mat-divider>
+<!-- <div mat-dialog-content class="p-3"> -->
+<div class="flex w-full justify-around items-center mt-5">
+  <span>Owner</span>
+  <mat-slide-toggle [(ngModel)]="isOwnerChecked"></mat-slide-toggle>
+</div>
+<!-- </div> -->
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="changeRole()">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,80 @@
+<app-inner-page-layout title="Profile Details">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <div class="lg:flex lg:w-full md:flex md:justify-between" *ngIf="profile">
+        <div class="lg:w-1/5 mr-12 md:w-full">
+          <img src="{{ profile.profileImageLink }}" />
+        </div>
+        <div class="w-full">
+          <div>
+            <h1>{{ profile.fullName }}</h1>
+            <h3 class="text-blue-400">{{ profile.title }}</h3>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="mt-3 lg:w-4/6">
+            <h2>About</h2>
+            <div class="flex items-center justify-between md:w-full">
+              <h3>Personal Email</h3>
+              <h3
+                *ngIf="
+                  profile.personalEmail &&
+                    !profile.personalEmail.includes('@flairshunter');
+                  else noPersonalEmail
+                "
+              >
+                <a href="mailto:{{ profile.personalEmail }}">
+                  {{ profile.personalEmail }}
+                </a>
+              </h3>
+              <ng-template #noPersonalEmail><h3>N/A</h3></ng-template>
+            </div>
+            <div class="flex items-center justify-between">
+              <h3>Organization Email</h3>
+              <h3 *ngIf="profile.organizationEmail; else noOrgEmail">
+                <a href="mailto:{{ profile.organizationEmail }}">
+                  {{ profile.organizationEmail }}
+                </a>
+              </h3>
+              <ng-template #noOrgEmail><h3>N/A</h3></ng-template>
+            </div>
+            <div class="flex items-center justify-between">
+              <h3>Current Team</h3>
+              <h3 *ngIf="profile.assignment && profile?.assignment.platform?.name">
+                {{ profile.assignment.platform.name }}
+              </h3>
+              <h3 *ngIf="!profile.assignment || !profile.assignment.platform?.name">
+                NA
+              </h3>
+            </div>
+            <div class="flex items-center justify-between">
+              <h3>Manager</h3>
+              <h3 *ngIf="profile.manager">
+                <a [routerLink]="['/profiles/details/' + profile.manager.id]">{{
+                  profile.manager.fullName
+                }}</a>
+              </h3>
+              <h3 *ngIf="!profile.manager">NA</h3>
+            </div>
+            <div class="flex items-center justify-between">
+              <h3>Skills</h3>
+              <h3 *ngIf="profile.skillOverallRatings">
+                <div class="skills-chips d-flex flex-wrap">
+                  <div
+                    class="m-1 d-flex align-items-center justify-content-center"
+                    *ngFor="let skill of profile.skillOverallRatings"
+                  >
+                    <span class="chip">{{ skill.name }}</span>
+                    <span class="overall-badge">{{ skill.overallRating }}</span>
+                  </div>
+                </div>
+              </h3>
+              <h3 *ngIf="!profile.skillOverallRatings">NA</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

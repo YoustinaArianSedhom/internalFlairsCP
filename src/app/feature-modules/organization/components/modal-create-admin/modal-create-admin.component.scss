@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+:host ::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: transparent;
+  }
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle,
+  .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background: var(--primary);
+    border: var(--primary);
+  }
+  .small-input {
+    border: 1px solid;
+    width: 2rem;
+    margin: 0px 1.5rem;
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: 600;
+  }
+  .mat-select{
+    width: 16.6%;
+  }
+}

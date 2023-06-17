@@ -1,0 +1,22 @@
+<ng-container *ngIf="(Portfolios$ | async)?.length; else noResult">
+  <!--__________Table_______________-->
+  <app-table-wrapper
+    [config]="tableConfig"
+    [records$]="Portfolios$"
+    (actionTaken)="mapTableAction($event)"
+    [classes]="pagination?.pageSize > 10 ? 'scroll' : 'no-scroll'"
+  >
+  </app-table-wrapper>
+
+  <!--_____________pagination__________-->
+  <!-- Pagination -->
+  <app-pagination
+    [config]="pagination"
+    (paginationChange)="firePaginateMyTeams($event)"
+  >
+  </app-pagination>
+</ng-container>
+
+<ng-template #noResult>
+  <app-no-result></app-no-result>
+</ng-template>

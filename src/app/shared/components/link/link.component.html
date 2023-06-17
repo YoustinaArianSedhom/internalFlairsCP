@@ -1,0 +1,11 @@
+<div class="ft-link">
+    <a 
+    [routerLink]="link" 
+    [rel]="rel" 
+    [queryParams]="params" 
+    [target]="target"
+    class="hover-pointer"
+    [ngClass]="{'disabled': disabled}">
+        <ng-content></ng-content>
+    </a>
+</div>

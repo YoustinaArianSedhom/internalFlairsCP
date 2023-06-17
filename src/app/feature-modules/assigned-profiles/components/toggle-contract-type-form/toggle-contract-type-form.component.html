@@ -1,0 +1,54 @@
+<app-form-modal>
+   <h2 mat-dialog-title class="uppercase text-primary border-b pb-2 border-gray-400">Change Contract Type</h2>
+
+   <mat-dialog-content class="custom-scrolling">
+      <div class="flex pb-5">
+         <div class="pr-3">
+            <mat-icon class="text-gray-300">error</mat-icon>
+         </div>
+         <span>
+            By Applying this action, the current association will end on "{{hintDate.from | date:'mediumDate' :'UTC'}}" and start a new one on "{{hintDate.to | date:'mediumDate' :'UTC'}}"
+         </span>
+      </div>
+      <form [formGroup]="toggleContractForm">
+         <div class="flex">
+
+            <div class="w-2/5">
+               <p class="text-gray-500 pl-2 pb-2">Employee Name</p>
+               <span class="px-4 py-2 border rounded text-gray-400 w-full inline-block">{{data.fullName}}</span>
+            </div>
+
+            <div class="w-3/5 pl-5">
+               <p class="text-gray-500 pl-2 pb-2">Contract Type</p>
+               <div class="flex flex-wrap">
+                  <span class="w-5/12 inline-block px-4 py-2 border rounded text-gray-400 lg:mr-5">From {{data.contractType ? 'Non Billable' : 'Billable'}}</span>
+                  <span class="w-5/12 inline-block px-4 py-2 border rounded text-gray-400 ">To {{!data.contractType ? 'Non Billable' : 'Billable'}}</span>
+               </div>
+            </div>
+         </div>
+         <ng-container *ngIf="data?.contractType">
+            <mat-form-field class="w-full pt-4" appearance="fill">
+               <input type="text" placeholder="Billing Rate*" aria-label="BillingRate" matInput maxlength="6"
+                  formControlName="billingRate" required />
+               <mat-error>
+                  <app-validation-error [control]="formControls?.billingRate" businessName="Billing Rate">
+                  </app-validation-error>
+               </mat-error>
+            </mat-form-field>
+
+         </ng-container>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions align="end">
+
+      <div class="justify-between flex">
+         <button mat-button mat-dialog-close class="cancel-btn rounded-none" cdkFocusInitial (click)="cancel()">
+            Cancel
+         </button>
+
+         <button mat-button class="action-btn rounded-none" [disabled]="toggleContractForm.invalid" (click)="submit()">
+            Apply
+         </button>
+      </div>
+   </mat-dialog-actions>
+</app-form-modal>

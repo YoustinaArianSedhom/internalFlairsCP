@@ -1,0 +1,133 @@
+<h1 mat-dialog-title>Edit Account</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <form
+    id="my-form"
+    class="mt-5"
+    [formGroup]="AddClientForm"
+    (ngSubmit)="EditClient(AddClientForm.value)"
+  >
+    <div class="w-full">
+      <div class="form-group items-center justify-center mb-4 w-full">
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Name</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="name"
+              autocomplete="off"
+              type="text"
+              maxlength="100"
+              matAutosize
+            />
+            <mat-hint
+              class="text-green-500"
+              *ngIf="AddClientForm.controls.name.value.length"
+            >
+              {{
+                calculateRemainingChars(
+                  100,
+                  AddClientForm.controls.name.value.length
+                )
+              }}
+            </mat-hint>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.name.errors?.required &&
+                AddClientForm.controls.name.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-4">Description</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <textarea
+              matInput
+              formControlName="description"
+              maxlength="200"
+            ></textarea>
+            <mat-hint
+              class="text-green-500"
+              *ngIf="AddClientForm.controls.description.value?.length"
+            >
+              {{
+                calculateRemainingChars(
+                  200,
+                  AddClientForm.controls.description?.value.length
+                )
+              }}
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group w-full">
+          <label for="profile" class="block mb-3">Profile Picture :</label>
+          <div class="w-full">
+            <ng-container *ngIf="!profileImage">
+              <input
+                style="display: none"
+                type="file"
+                (change)="uploadProfileImage($event)"
+                accept="image/jpeg, image/jpg, image/png"
+                maxlength="200"
+                #fileInput
+                (onFileChanged)="onFileChanges($event)"
+                alife-file-to-base64
+              />
+              <button
+                type="button"
+                class="
+                  bg-red-600
+                  m-auto
+                  flex
+                  items-center
+                  justify-center
+                  hover:bg-red-800
+                  text-white
+                  font-bold
+                  py-2
+                  px-4
+                "
+                (click)="fileInput.click()"
+              >
+                Upload Profile Image
+              </button>
+            </ng-container>
+
+            <div class="items-end flex">
+              <img
+                [src]="profileImage"
+                class="w-2/12"
+                *ngIf="profileImage"
+                alt="profile"
+              />
+              <button type="button" *ngIf="profileImage" (click)="removeLogo()">
+                <mat-icon class="text-red-700" title="Delete Profile Image"
+                  >delete</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+          <p class="mt-3 text-red-700">{{ errorMsg }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button
+    mat-raised-button
+    color="warn"
+    type="submit"
+    form="my-form"
+    [disabled]="AddClientForm.invalid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

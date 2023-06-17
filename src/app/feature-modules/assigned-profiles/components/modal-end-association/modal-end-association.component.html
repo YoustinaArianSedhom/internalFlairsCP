@@ -1,0 +1,105 @@
+<app-form-modal>
+    <h1 mat-dialog-title class="dialog-title">End Association</h1>
+
+    <mat-dialog-content class="custom-scrolling ">
+        <form [formGroup]="endAssociationForm">
+            <div>
+                <div class="md:flex justify-between items-center">
+                    <mat-form-field class=" w-full">
+                        <mat-label>Service End Date*</mat-label>
+                        <input [min]="startDate" matInput [matDatepicker]="picker" readonly
+                            formControlName="serviceEndDate" placeholder="Service End Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                            <app-validation-error [control]="formControls.serviceEndDate" businessName="Service End Date">
+                            </app-validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-checkbox formControlName="isDoneWithClient" (change)="isDoneWithClientChange($event)">Leave client with reason</mat-checkbox>
+                    <span class="block text-gray-400 text-sm">By checking the option, the turnover for the association will be recorded in the dashboard's chart of turnover reasons.</span>
+                </div>
+
+                <div *ngIf="formControls.isDoneWithClient.value"> 
+                    <div class="md:flex justify-between items-center" >
+                        <mat-form-field class=" w-full">
+                            <mat-label>Termination Reason</mat-label>
+                            <mat-select formControlName="terminationReason" required>
+                                <mat-option value="">--None--</mat-option>
+                                <mat-option *ngFor="let reason of terminationReasons" [value]="reason.id">
+                                    {{reason.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                <app-validation-error [control]="formControls.terminationReason" businessName="Termination Reason">
+                                </app-validation-error>
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- <div class="mt-2 w-full">
+                        <mat-form-field class="md:w-5/5 w-full">
+                            <mat-label>Voluntarily?</mat-label>
+                            <mat-select formControlName="voluntaryLeave">
+                                <mat-option *ngFor="let reason of isVoluntaryLeave" [value]="reason.id">
+                                    {{reason.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                <app-validation-error [control]="formControls.voluntaryLeave"
+                                    businessName="Voluntarily Reason">
+                                </app-validation-error>
+                            </mat-error>
+                        </mat-form-field>
+                    </div> -->
+
+                    <div class="flex justify-between items-center pt-3 w-full">
+                        <div class="flex justify-between items-center w-5/12 mb-2.5	">
+                            <mat-radio-group formControlName="voluntaryLeave" layout="row" aria-label="Select an option"
+                                class="flex">
+                                <mat-radio-button *ngFor="let reason of isVoluntaryLeave" [value]="reason.id"
+                                    class="pb-2 pr-3 md:pr-0">{{reason.name}}</mat-radio-button>
+                            </mat-radio-group>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-2 w-full">
+                        <span class="text-base font-bold">Turn Over Type:</span>
+                        <div class="flex justify-between w-full">
+                            <mat-selection-list formControlName="turnoverType" class="w-8/12">
+                                <mat-list-option checkboxPosition="before" [value]="i" 
+                                    *ngFor="let turnOver of turnOverTypes; let i = index">
+                                    {{turnOver.name}}
+                                    <mat-icon matListIcon svgIcon="info-circle" matTooltip="{{turnOver.note}}" ></mat-icon>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <div class="justify-between flex">
+            <button mat-flat-button mat-dialog-close class="cancel-btn">
+                Cancel
+            </button>
+
+            <button mat-flat-button [disabled]="endAssociationForm.invalid" class="action-btn" (click)="submit()">
+                Apply
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+
+</app-form-modal>

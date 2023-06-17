@@ -1,0 +1,115 @@
+:host {
+  display: block;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.side-panel {
+  position: absolute;
+  top: 48%;
+  width: 700px;
+  right: -100%;
+  background-color: white;
+  transform: translateY(-50%);
+  height: auto;
+  /* min-height: 400px; */
+  max-height: 100vh;
+  z-index: 10000;
+  overflow: hidden;
+  //   border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: rgb(100 100 111 / 44%) 0px 7px 29px 0px;
+  transition: 1s ease-in-out;
+}
+
+.side-panel-open {
+  //   animation: open 3s 2s 1 ease-in-out;
+  transition: 1s ease-in-out;
+  right: 0;
+  //   display: none;
+}
+
+@keyframes open {
+  0% {
+    right: -100%;
+  }
+  25% {
+    right: -75%;
+  }
+  50% {
+    right: -50%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+// .side-panel-close {
+//   animation: close 600s 2s 1 ease-in-out;
+// }
+
+@keyframes close {
+  0% {
+    right: 0%;
+  }
+  25% {
+    right: -25%;
+  }
+  50% {
+    right: -75%;
+  }
+  100% {
+    right: -100%;
+  }
+}
+
+.hide-overflow {
+  overflow: hidden !important;
+}
+
+.skills-chips {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  text-align: right;
+  float: right;
+  margin-top: 0px;
+  pointer-events: none;
+
+  .skillsContainer {
+    background: #e5e5e5;
+    padding: 0.1rem;
+    border-radius: 10rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .chip {
+    font-size: 0.8rem;
+    overflow: hidden;
+    display: inline-block;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+  }
+}
+
+.overall-badge {
+  background: #d13a27;
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  display: inline-flex;
+  color: white;
+  height: 1.2rem;
+  margin-right: 0.2rem;
+  text-align: center;
+}
+
+.sqaured-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}

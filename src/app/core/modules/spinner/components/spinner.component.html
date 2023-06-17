@@ -1,0 +1,15 @@
+<div *ngIf="(isEnabled$ | async) && (isActivated$ | async)" class="overlay">
+<!-- <div class="overlay"> -->
+  <!-- <mat-progress-spinner
+    class="spinner"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+  >
+  </mat-progress-spinner> -->
+
+  <div class="loader">
+      <div class="cyan"></div>
+      <div class="magenta"></div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<app-inner-page-layout [title]="headInformation.title">
+    <ng-container>
+  
+      <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+        <h3 *ngIf="SelectedClient">
+          <a class="cursor-pointer" (click)="allClientsClick()">... </a>/
+          <a (click)="clientClick()" class="cursor-pointer">{{
+            SelectedClient.name
+          }}</a>
+          <span *ngIf="SelectedPortfolio">
+            /
+            <a class="cursor-pointer" (click)="PortfolioClick()">{{
+              SelectedPortfolio.name
+            }}</a></span
+          >
+
+          <span *ngIf="SelectedTeam"> / {{ SelectedTeam.name }}</span>
+          
+        </h3>
+  
+        
+       
+  
+        
+        <!--Table-->
+  
+        <ng-container>
+          <customerPortal-table-departments></customerPortal-table-departments>
+        </ng-container>
+      </div>
+    </ng-container>
+  </app-inner-page-layout>
+  

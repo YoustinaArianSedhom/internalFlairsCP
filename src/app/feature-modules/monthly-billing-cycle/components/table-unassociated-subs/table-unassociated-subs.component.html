@@ -1,0 +1,14 @@
+<ng-container *ngIf="(unassociatedSubs$ | async)?.length; else noResult">
+   <!--__________Table_______________-->
+   <app-table-wrapper [config]="tableConfig" [records$]="unassociatedSubs$"
+      [classes]="pagination?.pageSize > 10 ? 'scroll' : 'no-scroll'">
+   </app-table-wrapper>
+
+   <!-- Pagination -->
+   <app-pagination [config]="pagination" (paginationChange)="paginateUnassociatedSubs($event)">
+   </app-pagination>
+</ng-container>
+
+<ng-template #noResult>
+   <app-no-result></app-no-result>
+</ng-template>

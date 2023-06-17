@@ -1,0 +1,16 @@
+<app-form-modal>
+   <!-- <h2 mat-dialog-title class="border-b pb-3 ">{{title}}</h2> -->
+
+   <mat-dialog-content class="custom-scrolling ">
+         <div class="flex justify-between py-3" *ngFor="let item of data?.amount">
+            <div class="pr-5 w-40">{{item?.currency?.name}}</div>
+            <div>{{item?.amount | currency : item?.currency?.code}}</div>
+         </div>
+
+   </mat-dialog-content>
+   <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class="cancel-btn rounded-none">
+         Cancel
+      </button>
+   </mat-dialog-actions>
+</app-form-modal>

@@ -1,0 +1,13 @@
+<app-inner-page-layout>
+    <ng-container *ngIf="myProfile">
+        <div>
+            <h1>{{myProfile.name}}'s Profile</h1>
+            <div class="bg-white w-full p-2 lg:p-5">
+                <!-- <div class=" flex items-center justify-end">
+                    <button mat-flat-button class="action-btn rounded-none" (click)="openBankInfoForm()">update bank info</button>
+                </div> -->
+                <app-my-personal-info [personalInfo]="myProfile"></app-my-personal-info>
+            </div>
+        </div>
+    </ng-container>
+</app-inner-page-layout>

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edit Profile Roles</h1>
+<mat-divider></mat-divider>
+<!-- <div mat-dialog-content class="p-3"> -->
+<div mat-dialog-content>
+  <div class="px-5">
+    <div class="mt-5 w-full">
+      <div class="flex mb-3 justify-between items-center">
+        <span>Super Admin</span>
+        <mat-slide-toggle
+          [(ngModel)]="isOwnerChecked"
+        ></mat-slide-toggle>
+      </div>
+      <div class="flex justify-between items-center">
+        <span>Internal Admin</span>
+        <mat-slide-toggle
+          [(ngModel)]="isInternalAdminChecked"
+        ></mat-slide-toggle>
+      </div>
+    </div>
+    <div class="mt-5" *ngIf="isInternalAdminChecked && checkedIDS">
+      <span>Accounts</span>
+      <clients-tree
+        [checkedIds]="checkedIDS$ | async"
+        (selectedLevelIds)="setOrganization($event)"
+      ></clients-tree>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="changeRole()">Save</button>
+</mat-dialog-actions>

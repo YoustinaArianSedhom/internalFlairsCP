@@ -1,0 +1,305 @@
+<h1 mat-dialog-title>Create Admin For Account</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <form class="mt-5" [formGroup]="AddClientForm" id="my-form">
+    <div class="w-full">
+      <div class="form-group items-center justify-center mb-4 w-full">
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Name*</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="name"
+              autocomplete="off"
+              type="text"
+              maxlength="100"
+              matAutosize
+            />
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.name.errors?.required &&
+                AddClientForm.controls.name.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Title*</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="title"
+              autocomplete="off"
+              type="text"
+              maxlength="100"
+              matAutosize
+            />
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.title.errors?.required &&
+                AddClientForm.controls.title.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Email*</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="clientEmail"
+              autocomplete="off"
+              type="text"
+              maxlength="200"
+              matAutosize
+            />
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.clientEmail.errors?.required &&
+                AddClientForm.controls.clientEmail.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.clientEmail.errors?.email &&
+                AddClientForm.controls.clientEmail.touched
+              "
+            >
+              Please Enter Valid Email !
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Password*</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="password"
+              autocomplete="off"
+              [type]="hide ? 'password' : 'text'"
+              pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+              maxlength="25"
+              minlength="8"
+              matAutosize
+            />
+            <mat-icon matSuffix class="cursor-pointer" (click)="hide = !hide">{{
+              hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.password.errors?.required &&
+                AddClientForm.controls.password.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                ((AddClientForm.controls.password.errors?.pattern &&
+                  AddClientForm.controls.password.touched) ||
+                  (AddClientForm.controls.password.value.length < 8 &&
+                    AddClientForm.controls.password.touched)) &&
+                !AddClientForm.controls.password.errors?.required &&
+                AddClientForm.controls.password.touched
+              "
+            >
+              Password Should contain 1 small letter, 1 capital, 1 symbol, 1
+              number Min = 8 chars , Max = 25 chars
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Confirm Password*</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              formControlName="confirmPassword"
+              autocomplete="off"
+              [type]="confrimHide ? 'password' : 'text'"
+              pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+              maxlength="25"
+              minlength="8"
+              matAutosize
+            />
+            <mat-icon
+              matSuffix
+              class="cursor-pointer"
+              (click)="confrimHide = !confrimHide"
+              >{{ confrimHide ? "visibility_off" : "visibility" }}</mat-icon
+            >
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.confirmPassword.errors?.required &&
+                AddClientForm.controls.confirmPassword.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                ((AddClientForm.controls.confirmPassword.errors?.pattern &&
+                  AddClientForm.controls.confirmPassword.touched) ||
+                  (AddClientForm.controls.confirmPassword.value.length < 8 &&
+                    AddClientForm.controls.confirmPassword.touched)) &&
+                !AddClientForm.controls.confirmPassword.errors?.required &&
+                AddClientForm.controls.confirmPassword.touched
+              "
+            >
+              Password Should contain 1 small letter, 1 capital, 1 symbol, 1
+              number Min = 8 chars , Max = 25 chars
+            </mat-hint>
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddClientForm.controls.password.touched &&
+                AddClientForm.controls.confirmPassword.touched &&
+                AddClientForm.controls.confirmPassword.value !==
+                  AddClientForm.controls.password.value &&
+                !(
+                  ((AddClientForm.controls.confirmPassword.errors?.pattern &&
+                    AddClientForm.controls.confirmPassword.touched) ||
+                    (AddClientForm.controls.confirmPassword.value.length < 8 &&
+                      AddClientForm.controls.confirmPassword.touched)) &&
+                  !AddClientForm.controls.confirmPassword.errors?.required &&
+                  AddClientForm.controls.confirmPassword.touched
+                ) &&
+                !(
+                  AddClientForm.controls.confirmPassword.errors?.required &&
+                  AddClientForm.controls.confirmPassword.touched
+                )
+              "
+            >
+              Confirm Password is not the same as Password
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group w-full">
+          <label for="profile" class="block mb-3">Image:</label>
+          <div class="w-full">
+            <ng-container *ngIf="!profileImage">
+              <input
+                style="display: none"
+                type="file"
+                (change)="uploadProfileImage($event)"
+                accept=".png, .jpg, .jpeg"
+                #fileInput
+                (onFileChanged)="onFileChanges($event)"
+                alife-file-to-base64
+              />
+              <button
+                type="button"
+                class="
+                  bg-red-600
+                  m-auto
+                  flex
+                  items-center
+                  justify-center
+                  hover:bg-red-800
+                  text-white
+                  font-bold
+                  py-2
+                  px-4
+                "
+                (click)="fileInput.click()"
+              >
+                Upload Profile Image
+              </button>
+            </ng-container>
+
+            <div class="items-end flex">
+              <img
+                class="w-2/12"
+                [src]="profileImage"
+                *ngIf="profileImage"
+                alt="profile"
+              />
+              <button
+                type="button"
+                *ngIf="profileImage"
+                (click)="
+                  profileImage = '';
+                  AddClientForm.controls.profileImage.setValue('')
+                "
+              >
+                <mat-icon class="text-red-700" title="Delete Profile Image"
+                  >delete</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+          <p class="mt-3 text-red-700">{{ errorMsg }}</p>
+        </div>
+
+        <div class="flex my-4 flex-col md:flex-row">
+          <label>Frequency of feedback</label>
+          <mat-radio-group formControlName="frequencyFeedback" aria-label="Select an option" class="flex flex-wrap md:flex-col ml-3">
+            <mat-radio-button *ngFor="let item of frequencyFeedbackOptions" [value]="item.id" class="pb-2 pr-3 md:pr-0">{{item.name}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <ng-container *ngIf="AddClientForm.controls.frequencyFeedback.value == 1">
+          <div  class="flex flex-wrap">
+            <label>Every</label>
+            <input type="text" matInput formControlName="frequencyFeedbackValue" type="text" class="small-input"/>
+            <mat-select formControlName="frequencyFeedbackDate">
+              <mat-option *ngFor="let option of frequencyFeedbackDateOptions" [value]="option.id">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="mt-4">
+            <mat-radio-group formControlName="frequencyFeedbackDayOfWeek" aria-label="Select an option"  class="flex flex-wrap flex-col md:flex-row ">
+              <mat-radio-button *ngFor="let day of daysOptions" [value]="day.id" class="pb-2 pr-3 md:pr-0 w-3/12">{{day.name}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </ng-container>
+        <div class="my-4">
+          <label for="profile" class="mr-14">Accounts*</label>
+          <clients-tree
+            (selectedLevelIds)="setOrganization($event)"
+          ></clients-tree>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button
+    mat-raised-button
+    color="warn"
+    [disabled]="
+      AddClientForm.invalid ||
+      AddClientForm.controls.password.value !==
+        AddClientForm.controls.confirmPassword.value ||
+      isClientEmpty ||
+      isTitleEmpty
+    "
+    (click)="addClient(AddClientForm.value)"
+  >
+    Add
+  </button>
+</mat-dialog-actions>

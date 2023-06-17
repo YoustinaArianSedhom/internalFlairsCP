@@ -1,0 +1,106 @@
+<ng-container *ngIf="record && column">
+  <div [ngSwitch]="column.type">
+    <!-- Link cell -->
+    <ng-template ngSwitchCase="link">
+      <ng-container *ngIf="column.value(record)?.title; else noLinkValueTemplate">
+        <app-link [icon]="false" [blank]="false" [link]="column.value(record).link">
+          {{ column.value(record).title }}</app-link>
+      </ng-container>
+
+      <ng-template #noLinkValueTemplate> N/A </ng-template>
+    </ng-template>
+    <ng-template ngSwitchCase="eventEmitter">
+      <span (click)="emitEvent(record, column.value(record))"
+        class="{{ setCellClasses(column.view.bodyCell?.classes, record) }}">
+        {{ column.value(record).label }}
+      </span>
+    </ng-template>
+
+    <ng-template ngSwitchCase="chips">
+      <div *ngIf="column.value(record); else noSkillsTemp" class="skills-chips d-flex flex-wrap">
+        <div class="m-1 d-flex align-items-center justify-content-center" *ngFor="let skill of column.value(record)">
+          <span class="chip">{{ skill.skillName }}</span>
+          <span class="overall-badge">{{ skill.overallRating }}</span>
+        </div>
+      </div>
+
+      <ng-template #noSkillsTemp> N/A </ng-template>
+    </ng-template>
+
+    <!-- Email Cell -->
+    <ng-template ngSwitchCase="email">
+      <div *ngIf="column.value(record); else noEmail">
+        <a href="mailto:{{ column.value(record) }}">
+          {{ column.value(record) }}</a>
+      </div>
+      <ng-template #noEmail>N/A</ng-template>
+    </ng-template>
+
+    <ng-template ngSwitchCase="avatar">
+      <img class="w-12 h-12 rounded-full object-cover" [src]="column.value(record)" />
+    </ng-template>
+
+    <ng-template ngSwitchCase="iconButton">
+      <mat-icon class="{{ setCellClasses(column.view.bodyCell?.classes, record) }}"
+        (click)="emitEvent(record, column.value(record))" class="mr-2">
+        {{column.value(record).icon}}
+      </mat-icon>
+    </ng-template>
+
+    <!-- Date Cell -->
+    <ng-template ngSwitchCase="date">
+      <span *ngIf="column.value(record); else noDateValueTemplate">{{
+        column.value(record) | date
+        }}</span>
+      <ng-template #noDateValueTemplate>N/A</ng-template>
+    </ng-template>
+
+    <!-- Status cell -->
+    <ng-template ngSwitchCase="status">
+      <span class="{{ setCellClasses(column.view.bodyCell?.classes, record) }}">
+        {{ column.value(record) }}
+      </span>
+    </ng-template>
+
+    <!-- Currency cell -->
+    <ng-template ngSwitchCase="currency">
+      <span *ngIf="column.value(record); else noCurrencyValueTemplate">
+        {{ column.value(record) | currency :  column?.extraInfoValue ? column?.extraInfoValue(record) : ''  }}
+      </span>
+      <ng-template #noCurrencyValueTemplate> N/A </ng-template>
+    </ng-template>
+
+    <!--Labeled Cell-->
+    <ng-template ngSwitchCase="extraInfo">
+      <span class="{{ setCellClasses(column.view.bodyCell?.classes, record) }}">
+        {{ column.value(record) }}
+      </span>
+      <span class="{{
+          setExtraInfoClasses(column.view.bodyCell?.extraInfoClasses, record)
+        }}">
+        {{ column.extraInfoValue(record) }}
+      </span>
+    </ng-template>
+
+     <!-- HTML Cell -->
+    <ng-template ngSwitchCase="html">
+        <div *ngIf="column.value(record); else noDateValueTemplate" [innerHTML]="column.value(record)"></div>
+        <ng-template #noDateValueTemplate>N/A</ng-template>
+    </ng-template>
+
+    <!--<ng-template ngSwitchCase='withNote'>
+            <div class="my-1 text-center">{{column.value(record).value}}</div>
+            <div *ngIf="column.value(record)?.note" class="flex text-gray-400 text-xs text-center my-1 px-1 rounded">
+
+                <span> {{column.value(record).note}}</span>
+            </div>
+        </ng-template>-->
+
+    <!-- Normal cell -->
+    <ng-template ngSwitchDefault>
+      <span class="{{ setCellClasses(column.view.bodyCell?.classes, record) }}">
+        {{ column.value(record) || "N/A" }}
+      </span>
+    </ng-template>
+  </div>
+</ng-container>

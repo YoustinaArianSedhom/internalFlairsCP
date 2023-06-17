@@ -1,0 +1,56 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+
+      <div class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox">
+        <div class="flex items-center">
+          <mat-icon class="text-gray-400">filter_alt</mat-icon>
+          <app-search-input maxlength="100" [withResult]="false" [search]="searchValue"
+            (searchChange)="fireFilterMyTeamBySearchQuery($event)" class="md:w-60 flex-grow filterBox-search"
+            placeholder="Search by Employee Name" [shouldSearchInputUpdate]="resetSearch">
+          </app-search-input>
+
+
+
+          <app-filter-menu menuClasses="managerMenu" label="Managers" [count]="managersSelected$ | async"
+            [isClearEnable]="isManagerSelected" (clearClick)="addManagers([])">
+            <customerPortal-managers-auto-complete [isEmptyList]="isManagerSelected ? false : true" class="px-3"
+              (ListOfManagers)="addManagers($event)" [managerList]="selectedManagers">
+            </customerPortal-managers-auto-complete>
+          </app-filter-menu>
+
+          <app-filter-menu label="Count of associations" #countFilter [isClearEnable]="isCountSelected"
+            (clearClick)="fireFilterByAssosiationCount('')">
+            <app-basic-select class="px-3 block" [emitPassedValue]="false" [options]="count"
+              [config]="associationCountConfig"
+              (optionsChange)="fireFilterByAssosiationCount($event); countFilter.menu.closeMenu()"
+              label="Filter by Count">
+            </app-basic-select>
+          </app-filter-menu>
+
+          <app-filter-menu label="Association status" #statusFilter [isClearEnable]="isStatusSelected"
+            (clearClick)="fireFilterByStatus('')">
+            <app-basic-select class="px-3 block" [emitPassedValue]="false" [options]="status" [config]="statusConfig"
+              (optionsChange)="fireFilterByStatus($event); statusFilter.menu.closeMenu()" label="Filter by Status">
+            </app-basic-select>
+          </app-filter-menu>
+
+          <div class="px-2 block">
+            <mat-checkbox class="my-3" (change)="fireFilterBySubs($event.checked)" [checked]="directOnly">View Direct
+              Subordinates</mat-checkbox>
+          </div>
+
+          <button (click)="resetFilters()" mat-button color="warn" aria-label="Clear Filter">
+            Clear
+          </button>
+
+        </div>
+      </div>
+
+      <ng-container>
+        <customerPortal-table-my-team></customerPortal-table-my-team>
+      </ng-container>
+
+    </div>
+  </ng-container>
+</app-inner-page-layout>

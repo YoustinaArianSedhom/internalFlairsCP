@@ -1,0 +1,119 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+@import "_base.scss";
+@import "_material-theme.scss";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$SSA-primary: mat-palette($mat-grey);
+$SSA-accent: mat-palette($mat-grey);
+
+// The warn palette is optional (defaults to red).
+$SSA-dark-red: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: var(--primary),
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$SSA-warn: mat-palette($SSA-dark-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$SSA-theme: mat-light-theme(
+  (
+    color: (
+      primary: $SSA-primary,
+      accent: $SSA-accent,
+      warn: $SSA-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($SSA-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  font-size: 87.5%;
+  transition: filter ease-in-out 0.3s;
+  // zoom: 0.9;
+}
+
+html,
+body {
+  height: 100%;
+  color: #4e4e4e;
+}
+html {
+  overflow: hidden;
+}
+body {
+  font-size: 14px;
+  font-size: 1rem;
+  margin: 0;
+  font-family: var(--mainFont) !important;
+}
+
+html[data-theme="dark"] {
+  background: #000;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent;
+}
+.w-fit{
+  width: fit-content;
+}
+.input-border {
+  border: 1px solid #e3dedeab;
+  padding: 3px 0.75rem;
+  width: 100% !important;
+  background: white;
+  border-radius: 5px;
+  
+  }
+ 

@@ -1,0 +1,47 @@
+<section
+  class="p-0 dialog-wrapper ConfirmationDialogData d-flex flex-column col-12 justify-content-between {{data.class}}">
+
+
+  <!-- Confirmation Dialog Header -->
+  <header class="w-full">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2 mat-dialog-title class="text-capitalize mat-dialog-title--small">
+        {{ data.title }}
+      </h2>
+    </div>
+  </header>
+
+
+
+  <section mat-dialog-content class="mat-typography">
+
+
+    <div class="content flex content-center flex-col justify-center">
+      <p [innerHTML]="data.content"></p>
+      <h5 *ngIf="data.hint" class="flex hint {{data.class}}">
+        <!-- <mat-icon class="icon stat-card-icon" inline="true" svgIcon="info" class="mr-2"></mat-icon> -->
+        {{data.hint}}
+      </h5>
+    </div>
+  </section>
+
+
+  <!-- Confirmation Dialog Actions -->
+  <section mat-dialog-actions align="end">
+
+    <!-- Cancel Button -->
+    <button *ngIf="!data.noCancelButton" mat-button mat-dialog-close class="cancel-btn rounded-none">
+      {{ data.cancelText || "Cancel" }}
+    </button>
+
+    <!-- Proceed Button -->
+    <button mat-button cdkFocusInitial mat-flat-button class="action-btn rounded-none" mat-dialog-close="proceed"
+      cdkFocusInitial>
+      {{ data.proceedText || "Confirm" }}
+    </button>
+
+    
+  </section>
+
+
+</section>

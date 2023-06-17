@@ -1,0 +1,85 @@
+<ng-container *ngIf="(records$ | async) && config">
+  <mat-table
+    [dataSource]="records$"
+    matSort
+    (matSortChange)="onSortChange($event)"
+    [class]="classes + ' custom-scrolling'"
+  >
+    <ng-container
+      [matColumnDef]="column"
+      *ngFor="let column of columnsWithoutActions"
+    >
+      <!-- With Sorting -->
+      <ng-container *ngIf="getColumn(column)?.sort; else columnWithoutSort">
+        <mat-header-cell
+          mat-sort-header
+          [start]="getColumn(column)?.sort.sortType == 1 ? 'asc' : 'desc'"
+          [disableClear]="getColumn(column)?.sort.disableClear || false"
+          *matHeaderCellDef
+          [ngClass]="
+            'flex-' +
+            getColumn(column).view?.width +
+            ' justify-' +
+            getColumn(column).view.headCell?.align
+          "
+        >
+          {{ getColumn(column).head | capitalize }}
+        </mat-header-cell>
+      </ng-container>
+
+      <!-- Without Sorting -->
+      <ng-template #columnWithoutSort>
+        <mat-header-cell
+          *matHeaderCellDef
+          [ngClass]="
+            'flex-' +
+            getColumn(column).view?.width +
+            ' justify-' +
+            getColumn(column).view.headCell?.align
+          "
+        >
+          {{ getColumn(column).head | capitalize }}</mat-header-cell
+        >
+      </ng-template>
+
+      <mat-cell
+        *matCellDef="let record"
+        [ngClass]="
+          'flex-' +
+          getColumn(column).view?.width +
+          ' justify-' +
+          getColumn(column).view.bodyCell?.align +
+          ' relative'
+        "
+      >
+        <app-table-body-cell [record]="record" [column]="getColumn(column)">
+        </app-table-body-cell>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        mat-header-cell
+        *matHeaderCellDef
+        class="flex-5 justify-end"
+        >{{ config.actionsLabel ? config.actionsLabel : "Actions" }}
+      </mat-header-cell>
+
+      <mat-cell
+        data-label="Actions"
+        mat-cell
+        *matCellDef="let record"
+        class="flex-5 justify-end"
+      >
+        <app-table-actions-cell
+          [actions]="config.actions"
+          [record]="record"
+        ></app-table-actions-cell>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="config.keys"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: config.keys"></mat-row>
+  </mat-table>
+</ng-container>

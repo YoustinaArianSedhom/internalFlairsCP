@@ -1,0 +1,74 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <h3 *ngIf="SelectedClient">
+        <a class="cursor-pointer" (click)="allClientsClick()">... </a>/
+        <a (click)="clientClick()" class="cursor-pointer">{{
+          SelectedClient.name
+        }}</a>
+      </h3>
+
+      <!-- <div class="bg-white w-3/5 flex mb-7">
+        <div>
+          <img
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+        </div>
+        <div class="bg-white w-full p-4 lg:p-4">
+          <h3>Valsoft</h3>
+          <p>...</p>
+          <h4>Description</h4>
+        </div>
+      </div> -->
+      <!--Search Input And Filters-->
+      <!-- <ssa-cards-wrapper-my-teams></ssa-cards-wrapper-my-teams> -->
+      <div class="flex justify-end items-baseline mb-7">
+        <!-- <button (click)="showFilters = !showFilters" mat-flat-button color="warn"
+        aria-label="Filter" class="iconBtn">
+        <mat-icon>filter_alt</mat-icon>
+      </button> -->
+        <button
+          (click)="openAddPortfolioModal(SelectedClient)"
+          class="
+            w-2/12
+            h-10
+            flex
+            items-center
+            justify-center
+            rounded-md
+            bg-black
+            text-white
+            ml-5
+          "
+          type="submit"
+        >
+          Add Portfolio
+        </button>
+
+        <!-- Filters Wrapper -->
+      </div>
+      <div  class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex">
+        <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon>
+          <app-search-input maxlength="100"
+          #searchInput
+          (searchChange)="fireFilterBysearchQuery($event)"
+          class="flex-grow filterBox-search" 
+          placeholder="Search by Name"
+          [withResult]="false"
+          [shouldSearchInputUpdate]="resetSearch"
+        ></app-search-input>
+           
+        </div><button (click)="resetFilter()" mat-button color="warn"
+        aria-label="Clear Filter" >
+        Clear
+      </button> </div>
+      <!--Table with its pagination-->
+
+      <ng-container>
+        <ssa-table-portfolios></ssa-table-portfolios>
+      </ng-container>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

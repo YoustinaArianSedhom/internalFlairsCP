@@ -1,0 +1,9 @@
+<!-- Filter Operator -->
+<mat-form-field class="operator-field w-100">
+    <mat-label>Operator</mat-label>
+    <mat-select [(value)]="operator" (selectionChange)="onFilterOperatorChange($event)" [disabled]="disabled">
+        <ng-container *ngFor="let operator of operators">
+            <mat-option [value]="operator.key">{{operator.value}}</mat-option>
+        </ng-container>        
+    </mat-select>
+</mat-form-field>

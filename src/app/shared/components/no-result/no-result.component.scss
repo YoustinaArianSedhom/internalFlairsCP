@@ -1,0 +1,49 @@
+.empty-state {
+    display: block;
+    max-width: 80vw;
+  
+    .empty-state__wrapper {
+      // margin: 8rem auto;
+    }
+  
+    .empty-state__text {
+      // font-family: ;
+      font-weight: 600;
+      font-size: 3rem;;
+      // text-transform: none;
+      text-align: left;
+      color: #323232;
+    }
+  
+    ul {
+      list-style: none;
+      display: inline-block;
+      margin: 1px auto;
+    }
+  
+    .empty-state__hint {
+      // font-family: ;
+      font-weight: 700;
+      font-size: 2rem;
+      text-transform: none;
+      text-align: left;
+      color: #323232;
+      margin: .5rem auto;
+    }
+  }
+  
+  .h-50vh{
+    height: 50vh;
+  }
+
+
+  // On Mobile Screen Make The No Data To Display Image Bigger 
+  @media screen and (max-width: 768px){
+    ul {
+      li {
+        img {
+          width: 90%;
+        }
+      }
+    }
+  }

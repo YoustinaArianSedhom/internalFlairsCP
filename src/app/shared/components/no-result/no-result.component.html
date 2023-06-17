@@ -1,0 +1,19 @@
+<section *ngIf="!(loading$ | async)" class="">
+    <div class="mt-10">
+        <ul>
+            
+            <!-- (filters?.length && isFilterHasValue(filters[0])) || -->
+            <li class="text-center">
+                {{message}}
+                <span
+                    *ngIf="searchQueries?.length">with
+                </span>
+            </li>
+            <li class="h-50vh flex">
+                <img src="assets/images/no_result_1.svg" alt="no result" class="m-auto w-1/4">
+            </li>
+            <!-- <li class="empty-state__hint text-center" *ngIf="filters?.length && isFilterHasValue(filters[0])">Different filters values.</li> -->
+            <li class="" *ngIf="searchQueries?.length">A different search value.</li>
+        </ul>
+    </div>
+</section>

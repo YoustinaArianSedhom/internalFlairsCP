@@ -1,0 +1,3 @@
+<ng-container *ngIf="control?.errors && control?.invalid && control?.touched">
+        {{  customMessage || getErrorMessage(control?.errors) }}
+</ng-container>

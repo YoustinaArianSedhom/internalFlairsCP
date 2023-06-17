@@ -1,0 +1,11 @@
+<mat-paginator
+  *ngIf="config.recordsTotalCount > 10"
+  [length]="config.recordsTotalCount"
+  [pageSize]="config.pageSize"
+  [pageIndex]="config.pageIndex"
+  [hidePageSize]="config.hidePageSize"
+  [pageSizeOptions]="config.pageSizeOptions"
+  [showFirstLastButtons]="'true'"
+  (page)="paginate($event)"
+>
+</mat-paginator>

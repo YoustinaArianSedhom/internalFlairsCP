@@ -1,0 +1,24 @@
+:host {
+    display: block;
+  }
+  
+  :host ::ng-deep {
+    mat-form-field mat-chip-list mat-chip.mat-chip {
+      background: #f44336 !important;
+    }
+    mat-form-field
+      mat-chip-list
+      mat-chip.mat-chip.mat-standard-chip
+      .mat-chip-remove {
+      color: white;
+      opacity: 0.8;
+    }
+  }
+
+  .organizationEmail{
+    opacity: 0.5;
+    color: gray;
+    font-size: 1rem;
+  }
+  
+  

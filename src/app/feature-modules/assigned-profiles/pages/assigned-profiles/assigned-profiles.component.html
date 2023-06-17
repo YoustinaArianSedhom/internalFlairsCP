@@ -1,0 +1,147 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <!-- <div class="bg-white w-3/5 flex mb-7">
+        <div>
+          <img
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+        </div>
+        <div class="bg-white w-full p-4 lg:p-4">
+          <h3>Valsoft</h3>
+          <p>...</p>
+          <h4>Description</h4>
+        </div>
+      </div> -->
+      <!--Search Input And Filters-->
+      <!-- <ssa-cards-wrapper-my-teams></ssa-cards-wrapper-my-teams> -->
+      <div>
+        <div class="flex justify-end items-center mb-7">
+          <!-- <button (click)="showFilters = !showFilters" mat-flat-button color="warn"
+            aria-label="Filter Assigned Profiles" class="iconBtn">
+            <mat-icon>filter_alt</mat-icon>
+          </button> -->
+          <div class="ml-5">
+            <button mat-flat-button color="warn" (click)="assignProfile()">
+              Associate New Profile
+            </button>
+          </div>
+          <div class="ml-5">
+            <button class="mt-1" [matMenuTriggerFor]="menu" aria-label="Import / Export Excel">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <!-- <mat-icon>backup</mat-icon> -->
+              <!-- <button mat-menu-item (click)="openUploadModal()">
+                <span>Import Employees</span>
+              </button> -->
+              <button mat-menu-item (click)="exportExcel()">
+                <!-- <mat-icon>cloud_download</mat-icon> -->
+                <span>Export Employees</span>
+              </button>
+              <!-- <button mat-menu-item (click)="fireImportTemplateExcel()">
+                <span>Import Employee Template</span>
+              </button> -->
+            </mat-menu>
+          </div>
+        </div>
+        <div class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex flex-wrap">
+          <div class="flex items-center">
+            <mat-icon class="text-gray-400">filter_alt</mat-icon>
+            <app-search-input maxlength="100" [withResult]="false" [search]="searchValue"
+              (searchChange)="_fireFilterAssignedProfileBySearchQuery($event)" class="md:w-60 flex-grow filterBox-search"
+              [isMobileScreen]="isMobile" placeholder="Search by Name or PO number" [shouldSearchInputUpdate]="resetSearch">
+            </app-search-input>
+          </div>
+
+          <div class="flex md:flex-nowrap flex-wrap justify-end items-baseline">
+            <app-filter-menu label="Skills" [count]="skillsSelected$ | async" [isClearEnable]="isSkillsSelected"
+              (clearClick)="fireFilterBySkills([])">
+              <app-assigned-profiles-skills-auto-complete [isEmptyList]="isSkillsSelected ? false : true" class="px-5"
+                (ListOfSkills)="fireFilterBySkills($event)" [skillList]="skillList">
+              </app-assigned-profiles-skills-auto-complete>
+            </app-filter-menu>
+
+            <app-filter-menu label="Manager" [isClearEnable]="isManagerSelected" (clearClick)="getManager(null)">
+              <mat-form-field class="w-full gap-x-2 px-5" appearance="fill"><input type="text"
+                  placeholder="Type a Manager Name" aria-label="ManagerId" matInput [formControl]="managerFormControl"
+                  [matAutocomplete]="autoManager" />
+                <mat-autocomplete #autoManager="matAutocomplete" [displayWith]="displayProfiles"
+                  (optionSelected)="getManager($event.option.value)">
+                  <mat-option *ngFor="let option of filteredManagers" [value]="option" class="mb-5 p-3 reports">
+                    {{ option.fullName }} <ng-container *ngIf="option.organizationEmail">({{ option.organizationEmail
+                      }})</ng-container>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+            </app-filter-menu>
+
+            <app-filter-menu label="Account" #clientFilter [isClearEnable]="isClientSelected"
+              (clearClick)="fireFilterByClient('')">
+              <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="clients$ | async"
+                [config]="ClientConfig" (optionsChange)="fireFilterByClient($event); clientFilter.menu.closeMenu();"
+                label="Filter by Account">
+              </app-basic-select>
+            </app-filter-menu>
+
+            <app-filter-menu label="Portfolio" #portfolioFilter [isClearEnable]="isPortfolioSelected"
+              (clearClick)="fireFilterByPortfolio('')">
+              <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="portfolios$ | async"
+                [disable]="isClientNotSelected" [config]="PortfolioConfig"
+                (optionsChange)="fireFilterByPortfolio($event);portfolioFilter.menu.closeMenu();"
+                label="Filter by Portfolio">
+              </app-basic-select>
+            </app-filter-menu>
+
+            <app-filter-menu label="Platform" #teamFilter [isClearEnable]="isTeamSelected"
+              (clearClick)="fireFilterByTeam('')">
+              <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="teams$ | async"
+                [disable]="isPortfolioNotSelected" [config]="TeamConfig"
+                (optionsChange)="fireFilterByTeam($event); teamFilter.menu.closeMenu()" label="Filter by Platform">
+              </app-basic-select>
+            </app-filter-menu>
+
+            <app-filter-menu label="Department" #departmentFilter [isClearEnable]="isDepartmentSelected"
+              (clearClick)="fireFilterByDepartment('')">
+              <app-basic-select  class="px-5 block" [emitPassedValue]="false"
+                [options]="department" [config]="departmentConfig"
+                (optionsChange)="fireFilterByDepartment($event); departmentFilter.menu.closeMenu()"
+                label="Filter by Department">
+              </app-basic-select>
+            </app-filter-menu>
+
+            <app-filter-menu label="Status" #statusFilter [isClearEnable]="isStatusSelected"
+              (clearClick)="fireFilterByStatus('')">
+              <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="Status" [config]="StatusConfig"
+                (optionsChange)="fireFilterByStatus($event); statusFilter.menu.closeMenu()" label="Filter by Status">
+              </app-basic-select>
+            </app-filter-menu>
+
+            <app-filter-menu label="Contract" #contractFilter [isClearEnable]="isContractSelected"
+              (clearClick)="fireFilterByContractType('')">
+              <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="contractType"
+                [config]="contractTypeConfig"
+                (optionsChange)="fireFilterByContractType($event); contractFilter.menu.closeMenu()"
+                label="Filter by Contract Type">
+              </app-basic-select>
+            </app-filter-menu>
+
+
+
+            <button (click)="resetFilter()" mat-button color="warn" aria-label="Clear Filter">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <app-table-assigned-profiles></app-table-assigned-profiles>
+      </ng-container>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

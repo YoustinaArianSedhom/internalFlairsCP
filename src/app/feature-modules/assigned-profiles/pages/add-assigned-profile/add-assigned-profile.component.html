@@ -1,0 +1,508 @@
+<app-inner-page-layout>
+  <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+    <h1  class="text-primary border-b-2 p-3">{{headInformation.title}}</h1>
+   
+      <form class="mt-10" [formGroup]="assignedProfileForm" (ngSubmit)="submitAssignedForm()"
+        (keydown.enter)="$event.preventDefault()">
+        <div class="grid grid-cols-1 gap-x-4 w-full px-5">
+          <!-- Section one -->
+        <div class="flex justify-between border-b-2 flex-col lg:flex-row px-5" >
+          <!-- Upload Image -->
+          <div class=" w-full lg:w-2/12 font-bold lg:mt-7">
+            <label for="profile" class="block">General Info</label>
+
+          <!-- Profile Picture  -->
+            <div class=" flex flex-col items-cetner w-fit mx-auto lg:w-full justify-center pt-7" >   
+                <!--  <ng-container *ngIf="!profileImage">
+                  <input style="display: none" type="file" (change)="uploadProfileImage($event)" accept="image/*" #fileInput
+                    (onFileChanged)="onFileChanges($event)" alife-file-to-base64 />
+                  <button type="button" class="
+                      bg-red-600
+                      m-auto
+                      flex
+                      items-center
+                      justify-center
+                      hover:bg-red-800
+                      text-white
+                      font-bold
+                      py-2
+                      px-4
+                    " (click)="fileInput.click()">
+                    Upload Profile Image
+                  </button>
+                </ng-container>-->
+                
+                <img class="rounded-lg bg-gray-300 w-40" [src]="profileImage"  alt="profile" />
+                <div class="upload-image" (click)="deleteProfileImage()"></div>             
+              <p class="mt-3 text-red-700">{{ errorMsg }}</p>
+            </div>
+
+          </div>
+  
+        <div class="w-full lg:w-10/12 pb-3">
+          <div class=" lg:w-full py-3 lg:flex lg:justify-between flex-col lg:flex-row lg:ml-3">
+            <!-- Profile -->
+            <div class=" lg:w-8/12 lg:flex lg:justify-between ">
+              <mat-form-field class="w-full inline-block" appearance="fill">
+                <mat-label for="profile">Profile</mat-label>
+                <input type="text" #profileAutoComplete placeholder="Type a Profile Name" aria-label="ProfileId" matInput
+                  formControlName="profileFormControl" [matAutocomplete]="autoProfile" required />
+      
+                <mat-icon *ngIf="!assignedProfileForm.controls.ProfileId.value"
+                  class="custom-icon">
+                  arrow_drop_down
+                </mat-icon>
+      
+                <mat-autocomplete #autoProfile="matAutocomplete" [displayWith]="displayProfiles" class="custom-scrolling"
+                  (optionSelected)="getProfile($event.option.value)">
+                  <mat-option *ngFor="let option of filteredProfiles" [value]="option" class="mb-5 p-3 reports">
+                    {{ option.fullName }} ({{ option.organizationEmail }})
+                    <div *ngIf="option.manager" class="text-gray-500 text-sm">
+                      reports to {{ option.manager.fullName }} ({{
+                      option.manager.organizationEmail
+                      }})
+                    </div>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error>
+                  <app-validation-error [control]="formControls?.profileFormControl" businessName="Profile">
+                  </app-validation-error>
+               </mat-error>
+
+                  <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.ProfileId.value" (click)="clearProfileValue($event)">
+                    close
+                  </mat-icon>
+
+              </mat-form-field>
+            </div>
+  
+            <!-- Full Name -->
+            <div class=" w-full lg:w-4/12 lg:px-5">
+              <mat-form-field class="w-full gap-x-2 inline-block" appearance="fill">
+                <mat-label for="fullName">Full Name</mat-label>
+                <input type="text" placeholder="Full Name" matInput formControlName="FullName" required maxlength="100" />
+  
+                <mat-error>
+                  <app-validation-error [control]="formControls?.FullName" businessName="Full Name">
+                  </app-validation-error>
+               </mat-error>
+              </mat-form-field>
+            </div> 
+            
+          </div>
+  
+          
+          <div class=" lg:w-full lg:py-3 pt-3 lg:flex lg:justify-between flex-col lg:flex-row lg:ml-3"> 
+            <!-- Role Field -->
+            <div class=" w-full lg:w-8/12 lg:flex lg:justify-between ">
+              <mat-form-field class="w-full gap-x-2" appearance="fill">
+                <mat-label for="Role">Service description*</mat-label>
+                <input #serviceAutoComplete  type="text" placeholder="Search For a Service Description" aria-label="contractType" matInput
+                  formControlName="roleFormControl" [matAutocomplete]="autoRole"  />
+                  <mat-icon *ngIf="!assignedProfileForm.controls.Role.value"
+                    
+                  class="custom-icon">
+                  arrow_drop_down
+                </mat-icon>
+                <mat-autocomplete #autoRole="matAutocomplete" [displayWith]="displayRole" class="custom-scrolling"
+                  (optionSelected)="getRole($event.option.value)" >
+                    <mat-option *ngFor="let option of rolesTypes" [value]="option" class="mb-5 p-3 reports">
+                      {{ option.name }}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.Role.value" (click)="clearRoleValue($event)">
+                  close
+                </mat-icon>
+              </mat-form-field>
+    
+            </div>
+            <!-- Title -->
+            <div class=" w-full lg:w-4/12 lg:px-5">
+              <mat-form-field class="w-full gap-x-2 inline-block" appearance="fill">
+                <mat-label for="title">Title</mat-label>
+                <input type="text" placeholder="Title" aria-label="Title" matInput formControlName="Title" required
+                  maxlength="100" />
+                  <mat-error>
+                    <app-validation-error [control]="formControls?.Title" businessName="Title">
+                    </app-validation-error>
+                 </mat-error>
+              </mat-form-field>
+            </div>
+            
+          </div>
+  
+          <div class=" lg:w-full lg:py-3 lg:flex lg:justify-between flex-col lg:flex-row lg:ml-3">
+            <!--  Contract type Field  -->
+            <div class=" w-full lg:w-4/12 2xl:pt-5 pt-1 2xl:flex pr-5 contract-field">
+              <!-- <app-basic-select [emitPassedValue]="false" [options]="contractType" [config]="contractTypeConfig"
+                (optionsChange)="setContractType($event)">
+              </app-basic-select> -->
+              <mat-label for="type" class="text-base text-gray-500 pr-5">Contract Type</mat-label>
+              <mat-radio-group class="flex justify-between 2xl:pt-2" formControlName="ContractType">
+                <mat-radio-button class="w-1/2" *ngFor="let contract of contractType " (change)="setContractType(contract.id)"
+                  [value]="contract.id">
+                  {{contract.name}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <!-- PO Number -->
+            <div class=" w-full lg:w-4/12 mb-5" *ngIf="poNumberID; else showPONumberAutoComplete">
+              <p class="label-text">PO Number</p>
+              <input type="text" formControlName="poNumberFormControl" class="input-border text-gray-400" readonly>
+            </div>
+            <ng-template #showPONumberAutoComplete>
+              <div class=" w-full lg:w-4/12 ">
+                <mat-form-field class="w-full gap-x-2 " appearance="fill">
+                  <mat-label for="pOId">PO Number
+                    <span *ngIf="isBillable">*</span>
+                  </mat-label>
+                  <input #poAutoComplete type="text" placeholder="Enter PO Number" aria-label="PO Number" matInput
+                    formControlName="poNumberFormControl" [matAutocomplete]="autoPO" 
+                    (blur)="validateAutoCompleteFormControl($event.target,'pOId')" />
+                  <mat-icon *ngIf="!assignedProfileForm.controls.pOId.value"
+                    
+                  class="custom-icon">
+                  arrow_drop_down
+                  </mat-icon>
+                  <mat-autocomplete #autoPO="matAutocomplete" (optionSelected)="onSelectPO($event.option.value)" class="custom-scrolling"
+                    [displayWith]="displayPONumbers">
+                    <mat-option *ngFor="let option of filteredPOs" [value]="option" class="p-3 ">
+                      {{ option.number }}
+                    </mat-option>
+                  </mat-autocomplete>
+                    <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.pOId.value" (click)="clearPONumberValue($event)">
+                      close
+                    </mat-icon>
+  
+                  <mat-error>
+                    <app-validation-error [control]="formControls?.pOId" businessName="PO Number">
+                    </app-validation-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </ng-template>
+
+            <!-- Billing Rate -->
+            <div class=" w-full lg:w-4/12 lg:px-5">
+              <div >
+                <span [ngClass]="{'hide': !isBillable}">
+
+                  <mat-form-field class="w-full gap-x-2 inline-block" appearance="fill">
+                    <mat-label for="billingRate">Billing rate</mat-label>
+                    <input type="text" placeholder="Billing Rate" aria-label="BillingRate" matInput maxlength="6"
+                      formControlName="BillingRate" required />
+                      <mat-error>
+                        <app-validation-error [control]="assignedProfileForm.controls.BillingRate" businessName="Billing Rate">
+                        </app-validation-error>
+                      </mat-error>
+                  </mat-form-field>
+                </span>
+              </div>
+            </div>
+
+          </div>
+          <div class="lg:w-full py-3 lg:flex flex-col lg:flex-row lg:ml-3">
+            <!-- Service Start Date -->
+            <div class=" w-full lg:w-4/12 lg:pr-5 pb-5">
+              <mat-form-field class="w-full gap-x-2 inline-block" appearance="fill">
+                <mat-label>Billing Start Date</mat-label>
+                <input matInput [matDatepicker]="joiningPicker" required
+                  (dateChange)="onChangeServiceStartDate($event.value)" [min]="minDate" formControlName="serviceStartDate"
+                  placeholder="Service Start Date" readonly/>
+                <mat-datepicker-toggle matSuffix [for]="joiningPicker"></mat-datepicker-toggle>
+                <mat-datepicker #joiningPicker ></mat-datepicker>
+                <mat-error>
+                  <app-validation-error [control]="formControls.serviceStartDate" businessName="Service Start Date"
+                    [customValidatorsErrorMessages]="{ 'beforePo':'Service start date must be >= start date of Purchase Order', 'startDateNotInBillingCycle': 'Please choose a Date in an open billing cycle'}"></app-validation-error>
+                  </mat-error>
+              </mat-form-field>
+                <mat-checkbox class=" lg:w-4/12" [ngClass]="{'hide': !isBillable}" formControlName="inheritStartDateFromPO"
+                  (change)="onChangeInheritDate($event.checked, 'serviceStartDate')">Inherit from PO start
+                  date</mat-checkbox>
+            </div>
+            <!-- Service End Date -->
+            <div class=" w-full lg:w-4/12 order-first lg:order-last ">
+              <mat-form-field class="w-full gap-x-2 inline-block dateLine" appearance="fill">
+                <mat-label for="billingEndDate">Billing End Date</mat-label>
+                <input matInput [matDatepicker]="serviceEndDatePicker" required formControlName="serviceEndDate" 
+                  placeholder="Service End Date" [min]="serviceEndDateMinDate">
+                <mat-datepicker-toggle matSuffix [for]="serviceEndDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #serviceEndDatePicker></mat-datepicker>
+                <mat-error>
+                  <app-validation-error [control]="formControls.serviceEndDate"
+                    businessName="Service End Date"></app-validation-error>
+                </mat-error>
+              </mat-form-field>
+                <mat-checkbox class=" lg:w-4/12" [ngClass]="{'hide': !isBillable}" formControlName="inheritEndDateFromPO"
+                  (change)="onChangeInheritDate($event.checked, 'serviceEndDate')">Inherit from PO end date</mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        </div>
+  
+          <!-- section two design in case of non-billable-->
+        <div class="flex justify-between border-b-2 flex-col lg:flex-row p-5" *ngIf="!isBillable">
+          <div class=" w-full lg:w-2/12 mt-3 font-bold py-5">
+            <label for="account" class="block ">Account Info</label>
+          </div>
+         
+          <div class="w-full lg:w-10/12 py-3 lg:ml-5">
+             <!-- Manager  -->
+            <div class=" w-full lg:w-8/12 lg:pr-5 py-3">
+              <mat-form-field class="w-full gap-x-2" appearance="fill">
+                <mat-label for="manager">Manager <span *ngIf="!isBillable">*</span></mat-label>
+                <input type="text" #managerAutoComplete placeholder="Type a Manager Name" aria-label="ManagerId" matInput
+                  formControlName="managerFormControl" [matAutocomplete]="autoManager"  />
+                  <mat-icon *ngIf="!assignedProfileForm.controls.ManagerId.value"
+                  class="custom-icon">
+                  arrow_drop_down
+                </mat-icon>
+                <mat-autocomplete #autoManager="matAutocomplete" (optionSelected)="getManager($event.option.value)" class="custom-scrolling">
+                  <mat-option *ngFor="let option of filteredManagers" [value]="option" class="mb-5 p-3 reports">
+                    {{ option.fullName }} ({{ option.organizationEmail }})
+                    <div class="text-gray-500 text-sm" *ngIf="option.manager">
+                      reports to {{ option.manager?.fullName }} ({{
+                      option.manager?.organizationEmail
+                      }})
+                    </div>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error>
+                  <app-validation-error [control]="formControls?.managerFormControl" businessName="Manager">
+                  </app-validation-error>
+                </mat-error>
+                  <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.ManagerId.value" (click)="clearManagerValue($event)">
+                    close
+                  </mat-icon>
+
+              </mat-form-field>
+            </div>
+             <!-- Account / platform / portfolio -->
+            <div class=" w-full lg:flex lg:justify-between">
+              <div class=" w-full lg:w-4/12 py-3">
+                  <mat-form-field class="w-full" appearance="fill">
+                    <mat-label for="account">Account<span *ngIf="!isBillable">*</span></mat-label>
+                    <input #accountAutoComplete type="text" placeholder="Type Account name" aria-label="ClientId" matInput
+                      formControlName="clientFormControl" [matAutocomplete]="autoClient"  />
+                    <mat-icon *ngIf="!assignedProfileForm.controls.ClientId.value"
+                      class="custom-icon">
+                      arrow_drop_down
+                    </mat-icon>
+                    <mat-autocomplete #autoClient="matAutocomplete" (optionSelected)="getClient($event.option.value);
+                      setClientName($event.option.value)" class="custom-scrolling">
+                      <mat-option *ngFor="let option of filteredClients" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error>
+                      <app-validation-error [control]="formControls?.clientFormControl" businessName="Account"></app-validation-error>
+                    </mat-error>
+                      <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.ClientId.value"  (click)="clearAccountValue($event)">
+                        close
+                      </mat-icon>
+                  </mat-form-field>
+                
+              </div>
+              <div class=" w-full lg:w-4/12 lg:px-5 py-3">
+                <mat-form-field class="w-full" appearance="fill">
+                  <mat-label for="portfolio">Portfolio<span *ngIf="!isBillable">*</span></mat-label>
+                  <input #portfolioAutoComplete [readonly]="!assignedProfileForm.controls.ClientId.value" type="text"
+                    placeholder="Type Portfolio name" aria-label="PortfolioId" matInput
+                    formControlName="portfolioFormControl" [matAutocomplete]="auto"  />
+                  <mat-icon *ngIf="!assignedProfileForm.controls.PortfolioId.value"
+                    class="custom-icon">
+                    arrow_drop_down
+                  </mat-icon>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getPortfolio($event.option.value)" class="custom-scrolling">
+                    <mat-option *ngFor="let option of filteredPortfolios" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error>
+                    <app-validation-error [control]="formControls?.portfolioFormControl" businessName="Portfolio">
+                    </app-validation-error>
+                  </mat-error>
+
+                    <mat-icon class="custom-icon" *ngIf="assignedProfileForm.controls.PortfolioId.value" (click)="clearPortfolioValue($event)">
+                      close
+                    </mat-icon>
+
+                </mat-form-field>
+              </div>
+              <div class=" w-full lg:w-4/12 py-3">
+                <mat-form-field class="w-full" appearance="fill">
+                  <mat-label for="platform">Platform<span *ngIf="!isBillable">*</span></mat-label>
+                  <input #platformAutoComplete [readonly]="!assignedProfileForm.controls.PortfolioId.value" type="text"
+                    placeholder="Type Platform name" aria-label="TeamId" matInput formControlName="teamFormControl"
+                    [matAutocomplete]="autoTeam"  />
+                  <mat-icon *ngIf="!assignedProfileForm.controls.PlatformId.value"
+                    class="custom-icon">
+                    arrow_drop_down
+                  </mat-icon>
+                  <mat-autocomplete #autoTeam="matAutocomplete" (optionSelected)="getTeam($event.option.value)" class="custom-scrolling">
+                    <mat-option *ngFor="let option of filteredTeams" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error>
+                    <app-validation-error [control]="formControls?.teamFormControl" businessName="Platform">
+                    </app-validation-error>
+                  </mat-error>
+
+                    <mat-icon class="custom-icon"  *ngIf="assignedProfileForm.controls.PlatformId.value" (click)="clearPlatformValue($event)">
+                      close
+                    </mat-icon>
+
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <div class=" w-full lg:flex lg:justify-between">
+              <div class=" w-full lg:w-4/12 py-3">
+                <mat-form-field class="w-full gap-x-2" appearance="fill">
+                  <mat-label>
+                    {{clientInfo.clientName + ' Manager Name'}}
+                    <span *ngIf="!isBillable">*</span></mat-label>
+                  <input type="text" [placeholder]="clientInfo.clientName + ' Manager Name'" aria-label="ClientManager" matInput
+                    formControlName="clientManagerName"  />
+                  <mat-error>
+                    <app-validation-error [control]="formControls?.clientManagerName" businessName="Account Manager Name">
+                    </app-validation-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class=" w-full lg:w-4/12 lg:px-5 py-3">
+                <mat-form-field class="w-full gap-x-2" appearance="fill">
+                  <mat-label>                  
+                    {{clientInfo.clientName + ' Manager Email'}}
+                    <span *ngIf="!isBillable">*</span>
+                  </mat-label>
+                  <input type="text" [placeholder]="clientInfo.clientName + ' Manager Email'" aria-label="ClientEmail" matInput
+                    formControlName="clientManagerEmail"  />
+                    <mat-error>
+                      <app-validation-error [control]="formControls?.clientManagerEmail" businessName="Account Manager Email">
+                      </app-validation-error>
+                    </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class=" w-full lg:w-4/12">
+                <app-basic-select [emitPassedValue]="false" [options]="departmentType" [config]="departmentTypeConfig"
+                  (optionsChange)="setDepartment($event)"  label="Select Department*">
+                </app-basic-select>
+              </div>
+            </div>
+
+          </div>
+  
+        </div>
+        <!-- section two design in case of billable-->
+        <div class="flex justify-between border-b-2 flex-col lg:flex-row p-5" *ngIf="isBillable">
+          <div class=" w-full lg:w-2/12 mt-3 font-bold py-5">
+            <label for="account" class="block ">Account Info</label>
+          </div>
+         
+          <div class="w-full lg:w-10/12 lg:ml-5">
+             <!-- Manager  -->
+            <div class="w-full lg:w-8/12 lg:pr-5 py-3">
+              <p class="label-text">Manager</p>
+              <input type="text" formControlName="managerFormControl" placeholder= "Manager" class="input-border text-gray-400">
+            </div>
+             <!-- Account / platform / portfolio -->
+            <div class=" w-full lg:flex lg:justify-between py-3">
+              <div class=" w-full lg:w-4/12 ">
+                <p class="label-text">Account</p>
+                <input type="text" formControlName="clientFormControl" placeholder= "Account" class="input-border text-gray-400">
+                
+              </div>
+              <div class=" w-full lg:w-4/12 lg:px-5">
+                <p class="label-text">Portfolio</p>
+                <input type="text" formControlName="portfolioFormControl" placeholder= "Portfolio" class="input-border text-gray-400">
+              </div>
+
+              <div class=" w-full lg:w-4/12">
+                <p class="label-text">Platform</p>
+                <input type="text" formControlName="teamFormControl" placeholder= "Platform" class="input-border text-gray-400">
+              </div>
+            </div>
+            <!-- Client Name (Email)/ Department -->
+            <div class=" w-full lg:flex lg:justify-between py-3">
+              <div class=" w-full lg:w-8/12 lg:pr-5 py-3">
+                <p class="label-text">Account Manager</p>
+                <input type="text" formControlName="clientManagerName" placeholder= "Manager Name (Email)"  class="input-border text-gray-400">
+              </div>
+
+              <div class=" w-full lg:w-4/12 py-3">
+                <p class="label-text">Department</p>
+                <input type="text" [disabled]="isBillable" [value]="selectedDepartment" placeholder= "Department" class="input-border text-gray-400">
+              </div>
+            </div>
+
+          </div>
+  
+        </div>
+
+        <!-- section three -->
+        <div class="lg:flex p-5">
+          <div class="w-full lg:w-2/12 mt-3 font-bold py-5">
+            <label for="moreInfo">More Info</label>
+          </div>
+          <div class="w-full lg:w-10/12 lg:ml-5">
+            <div class="lg:flex w-full">
+              <div class=" w-full lg:w-4/12">
+                <app-basic-select [emitPassedValue]="false" [options]="locationTypes" [config]="locationTypesConfig"
+                  (optionsChange)="setLocation($event)" label="Select Location">
+                </app-basic-select>
+              </div>
+              <div class=" w-full lg:w-4/12 lg:px-5">
+                  <mat-form-field class="w-full">
+                    <mat-label for="externalEmail">External Email</mat-label>
+                    <input type="text" placeholder="External Email" matInput formControlName="externalEmployeeEmail" />
+      
+                    <mat-error>
+                      <app-validation-error [control]="formControls?.externalEmployeeEmail" businessName="External Employee Email">
+                      </app-validation-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <!-- <app-basic-select [emitPassedValue]="false" [options]="rolesTypes" [config]="rolesTypesConfig"
+                    (optionsChange)="setRole($event)" label="Select Role">
+                  </app-basic-select> -->
+              </div>
+            </div>
+  
+            <!-- Notes Field -->
+            <div class="lg:w-8/12 pt-2">
+              <mat-form-field class="w-full" appearance="fill">
+                <textarea matInput formControlName="notes" placeholder="Notes" rows="4"></textarea>
+              </mat-form-field>
+
+              </div>
+            </div>
+          </div>
+         
+
+          <div class=" flex justify-end ">
+            <button routerLink="/assigned-profiles" class="
+                bg-gray-300
+                hover:bg-gray-400
+                text-gray-800
+                font-bold
+                mx-3
+                py-2
+                px-4
+                rounded
+              ">
+              Cancel
+            </button>
+           
+            <button type="submit" mat-raised-button color="warn" [disabled]="assignedProfileForm.invalid">
+              {{ associationID ? 'Clone' : 'Submit'}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </app-inner-page-layout>

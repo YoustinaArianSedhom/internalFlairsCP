@@ -1,0 +1,40 @@
+$form_dialog_small: 35vw;
+$form_dialog_normal: 45vw;
+
+.form-dialog {
+
+  .mat-dialog-container {
+    min-width: 30vw;
+    max-width: $form_dialog_normal;
+    max-height: 100vh;
+    border-radius: 0;
+
+    @media screen and (max-width: 768px) {
+      max-width: 90vw;
+    }
+  }
+
+  &--small .mat-dialog-container {
+    max-width: $form_dialog_small;
+  }
+
+  &--medium .mat-dialog-container{
+    min-width: 40vw;
+    max-width: 80vw;
+  }
+
+  // On Mobile Screen Make The Modal Form Display Correctly
+  @media screen and (max-width: 768px) {
+    &--small .mat-dialog-container {
+      max-width: none;
+    } 
+    &--medium .mat-dialog-container{
+      min-width: 70vw;
+    }
+  }
+
+
+  .mat-dialog-content {
+    min-height: auto;
+  }
+}

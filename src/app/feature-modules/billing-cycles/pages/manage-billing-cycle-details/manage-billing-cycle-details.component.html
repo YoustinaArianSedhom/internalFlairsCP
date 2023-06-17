@@ -1,0 +1,45 @@
+<app-inner-page-layout >
+   <h1 class="flex items-center" style="margin-bottom: 0 !important;"><button class="mr-3" (click)="navigateBack()"><mat-icon class="text-2xl">arrow_back_ios</mat-icon></button> {{headInformation.title}}</h1>
+   <ng-container>
+      <div class="flex justify-between">
+         <div>
+            <h2 class="text-primary flex items-center " *ngIf="(selectedCycle$ | async)?.hasShortage">
+               <mat-icon svgIcon="shortage" class="mr-2"></mat-icon>
+               <span>
+                  This Billing Cycle Has Shortage Amount! 
+               </span>
+            </h2>
+         </div>
+         <div class="flex justify-end items-center mb-5">
+            <div  class="pr-9" (click)="toggleShowBillingRate()">
+               <label class="cursor-pointer">
+                  Show Billing Rate & Amount
+               </label>
+               <mat-icon color="warn" class="cursor-pointer" svgIcon="{{showBillingRateAndAmount ? 'unlock' : 'lock'}}"></mat-icon>
+            </div>
+            <button mat-flat-button color="warn" (click)="exportBillingCycleDetailsAsExcel()">
+               <span>Export</span>
+            </button>
+         </div>
+      </div>
+      <div class="bg-white w-full py-1 px-5 my-3 flex justify-between items-center">
+         <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon>
+            <app-search-input maxlength="100" [withResult]="false"
+            [search]="searchQuery"
+            (searchChange)="fireSearchBillingCycleDetails($event)"
+            class="flex-grow filterBox-search"
+            [isMobileScreen]="isMobile"
+            placeholder="Search by resource name, PO number"
+            [shouldSearchInputUpdate]="resetSearch"
+          ></app-search-input>
+          </div>
+          <button (click)="resetFilter()" mat-button color="warn" aria-label="Clear Filter">
+            Clear
+          </button>
+      </div>
+      <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+         <customerPortal-table-billing-cycle-details></customerPortal-table-billing-cycle-details>
+        
+      </div>
+   </ng-container>
+</app-inner-page-layout>

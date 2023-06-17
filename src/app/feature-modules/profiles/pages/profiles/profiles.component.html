@@ -1,0 +1,66 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <!-- <div class="bg-white w-3/5 flex mb-7">
+        <div>
+          <img
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+        </div>
+        <div class="bg-white w-full p-4 lg:p-4">
+          <h3>Valsoft</h3>
+          <p>...</p>
+          <h4>Description</h4>
+        </div>
+      </div> -->
+      <!--Search Input And Filters-->
+      <!-- <ssa-cards-wrapper-my-teams></ssa-cards-wrapper-my-teams> -->
+      <div>
+        <!-- <div class="flex justify-end items-baseline mb-7">
+          <button (click)="showFilters = !showFilters" mat-flat-button color="warn"
+            aria-label="Filter Assigned Profiles" class="iconBtn">
+            <mat-icon>filter_alt</mat-icon>
+          </button>
+        </div> -->
+        <div  class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex">
+          <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon>
+         
+          <!-- Filters Inner Wrapper -->
+          <app-search-input maxlength="100" (searchChange)="fireSearchMyTeamsBySearch($event)" class="flex-grow filterBox-search"
+            [isMobileScreen]="isMobile" placeholder="Search by Name" [shouldSearchInputUpdate]="resetSearch" [withResult]="false">
+          </app-search-input></div>
+          <div class="flex md:flex-nowrap flex-wrap justify-end items-baseline">
+            <!--Task Status-->
+            <app-filter-menu label="Skills" [count]="skillsSelected$ | async" [isClearEnable]="isSkillsSelected" (clearClick)="fireFilterBySkills([])">
+            <app-profiles-skills-auto-complete [isEmptyList]="isSkillsSelected ? false : true" class="px-5 block" (ListOfSkills)="fireFilterBySkills($event)">
+            </app-profiles-skills-auto-complete></app-filter-menu>
+
+            <app-filter-menu #typeFilter label="Type" [isClearEnable]="isTypelSelected" (clearClick)="fireFilterByType(ProfileType[0].id)">
+            <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="ProfileType"
+              [config]="ProfileTypeConfig" (optionsChange)="fireFilterByType($event); typeFilter.menu.closeMenu();" label="Filter by Type">
+            </app-basic-select></app-filter-menu>
+
+            <app-filter-menu #assignmentFilter label="Assignment"  [isClearEnable]="isAssignmentSelected" (clearClick)="fireFilterByAssignment('')">
+            <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="ProfileAssignment"
+              [config]="ProfileAssignmentConfig" (optionsChange)="fireFilterByAssignment($event); assignmentFilter.menu.closeMenu();"
+              (selectionChange)="selectionChange($event)" label="Filter by Assignment">
+            </app-basic-select></app-filter-menu>
+            <button (click)="resetFilter()" mat-button color="warn"
+            aria-label="Clear Filter" >
+            Clear
+          </button>
+          </div>
+          </div>
+      </div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <app-table-profiles></app-table-profiles>
+      </ng-container>
+
+
+    </div>
+  </ng-container>
+</app-inner-page-layout>

@@ -1,0 +1,30 @@
+<app-inner-page-layout>
+
+
+
+    <ng-container>
+        <h1>{{headInformation.title}}</h1>
+
+
+        <div class="inner-wrapper bg-white w-full p-1 lg:p-5 ">
+            <div class="lg:flex lg:justify-between grid grid-cols-2 items-center">
+                <app-search-input 
+                (searchChange)="fireSearchUsersAction($event)" 
+                class="col-span-2"
+                searchTooltip="Search by name or email"
+                [isMobileScreen]="isMobile"></app-search-input>
+            </div>
+
+
+            <ng-container *ngIf="!isMobile; else mobileCardsView">
+                <ssa-table-user-management></ssa-table-user-management>
+            </ng-container>
+
+            <ng-template #mobileCardsView>                
+                <ssa-cards-wrapper-user-management></ssa-cards-wrapper-user-management>
+            </ng-template>
+        </div>
+
+
+    </ng-container>
+</app-inner-page-layout>

@@ -1,0 +1,55 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <h3 *ngIf="SelectedClient">
+        <a class="cursor-pointer" (click)="allClientsClick()">... </a>/
+        <a (click)="clientClick()" class="cursor-pointer">{{
+          SelectedClient.name
+        }}</a>
+        <span *ngIf="SelectedPortfolio">
+          /
+          <a class="cursor-pointer" (click)="PortfolioClick()">{{
+            SelectedPortfolio.name
+          }}</a></span
+        >
+
+        <span *ngIf="SelectedTeam">
+          /
+          <a class="cursor-pointer" (click)="TeamClick()">{{
+            SelectedTeam.name
+          }}</a></span
+        >
+        <span *ngIf="SelectedDepartment"> / {{ SelectedDepartment.name }}</span>
+      </h3>
+      <!-- <div class="flex justify-end items-baseline mb-7"> -->
+        <!-- <button (click)="showFilters = !showFilters" mat-flat-button color="warn"
+            aria-label="Filter" class="iconBtn">
+            <mat-icon>filter_alt</mat-icon>
+          </button> -->
+
+        <!-- Filters Wrapper -->
+      <!-- </div> -->
+      <div  class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex">
+        <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon>
+          <app-search-input maxlength="100"
+          #searchInput
+          (searchChange)="fireFilterBysearchQuery($event)"
+          class="flex-grow filterBox-search" 
+          placeholder="Search by Name"
+          [withResult]="false"
+          [shouldSearchInputUpdate]="resetSearch"
+        ></app-search-input> 
+      </div><button (click)="resetFilter()" mat-button color="warn"
+      aria-label="Clear Filter" >
+      Clear
+    </button></div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <customerPortal-table-profiles></customerPortal-table-profiles>
+      </ng-container>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

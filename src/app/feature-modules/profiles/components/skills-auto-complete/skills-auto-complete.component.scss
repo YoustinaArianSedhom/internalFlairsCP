@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+// :host ::ng-deep {
+//   .mat-chip-list-wrapper .mat-chip.mat-chip {
+//     background: green;
+//   }
+// }
+
+.large-width {
+  width: 300px;
+}
+
+:host ::ng-deep {
+  mat-form-field mat-chip-list mat-chip.mat-chip {
+    background: #f44336 !important;
+  }
+  mat-form-field
+    mat-chip-list
+    mat-chip.mat-chip.mat-standard-chip
+    .mat-chip-remove {
+    color: white;
+    opacity: 0.8;
+  }
+}

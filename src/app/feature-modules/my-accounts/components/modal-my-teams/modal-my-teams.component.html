@@ -1,0 +1,81 @@
+<h1 mat-dialog-title>Details</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <div class="flex w-full justify-between mt-3">
+    <div class="w-3/5">
+      <div class="flex justify-between">
+        <h3>FullName</h3>
+        <h4>{{ data[0].fullName }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Title</h3>
+        <h4>{{ data[0].title }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Portfolio</h3>
+        <h4>{{ data[0].team.portfolio.name }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Team</h3>
+        <h4>{{ data[0].team.name }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Billing Rate</h3>
+        <h4>{{ data[0].billingRate | currency }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>FlairsTech Email</h3>
+        <h4>
+          <a href="mailto:{{ data[0].profile.organizationEmail }}">{{
+            data[0].profile.organizationEmail
+            }}</a>
+        </h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Hiring Date</h3>
+        <h4>{{ data[0].hiringDate | date }}</h4>
+      </div>
+      <div *ngIf="data[0].leavingDate; else NA" class="flex justify-between">
+        <h3>Leaving Date</h3>
+        <h4>{{ data[0].leavingDate | date }}</h4>
+      </div>
+      <ng-template #NA>
+        <div class="flex justify-between">
+          <h3>Leaving Date</h3>
+          <h4>NA</h4>
+        </div>
+      </ng-template>
+      <div class="flex justify-between">
+        <h3>Status</h3>
+        <h4>{{ getStatus(data[0].status)[0].name }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Manager</h3>
+        <h4>{{ data[0].manager.name }}</h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Manager Email</h3>
+        <h4>
+          <a href="mailto:{{ data[0].manager.organizationEmail }}">
+            {{ data[0].manager.organizationEmail }}
+          </a>
+        </h4>
+      </div>
+      <div class="flex justify-between">
+        <h3>Skills</h3>
+        <div class="skills-chips d-flex flex-wrap">
+          <div class="m-1 flex items-center justify-center" *ngFor="let skill of data[0].profile.skillOverallRatings">
+            <span class="chip">{{ skill.name }}</span>
+            <span class="overall-badge">{{ skill.overallRating }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-1/5">
+      <img src="{{ data[0].profileImageLink }}" />
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

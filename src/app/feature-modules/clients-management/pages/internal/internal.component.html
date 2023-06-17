@@ -1,0 +1,57 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <div>
+        <div class="flex justify-end items-baseline mb-7">
+          <!-- <button (click)="showFilters = !showFilters" mat-flat-button color="warn"
+            aria-label="Filter Assigned Profiles" class="iconBtn">
+            <mat-icon>filter_alt</mat-icon>
+          </button> -->
+          
+          
+
+          <!-- Filters Wrapper -->
+        </div>
+        <div  class="md:justify-between md:items-center bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox md:flex">
+          <div class="flex items-center"><mat-icon class="text-gray-400">filter_alt</mat-icon><app-search-input (searchChange)="fireFilterBysearchQuery($event)" class="flex-grow filterBox-search"  placeholder="Search"
+            [shouldSearchInputUpdate]="resetSearch" [withResult]="false" maxlength="100"></app-search-input></div>
+
+            <div class="flex md:flex-nowrap flex-wrap justify-end items-baseline">
+              <app-filter-menu label="Role" #roleFilter  [isClearEnable]="isRoleSelected" (clearClick)="fireFilterByRole('')">
+          <app-basic-select  class="px-5 block" [emitPassedValue]="false" [options]="Roles" [config]="RolesConfig"
+            (optionsChange)="fireFilterByRole($event); roleFilter.menu.closeMenu();" label="Filter by Role">
+          </app-basic-select></app-filter-menu>
+          
+          <ng-container *ngIf="showOrganizationFilters">
+            <app-filter-menu label="Account" #clientFilter  [isClearEnable]="isClientSelected" (clearClick)="fireFilterByClient('')">
+            <app-basic-select  class="px-5 block" [emitPassedValue]="false" [options]="Clients" [config]="ClientsConfig"
+              (optionsChange)="fireFilterByClient($event); clientFilter.menu.closeMenu();" label="Filter by Client">
+            </app-basic-select></app-filter-menu>
+
+            <app-filter-menu label="Portfolio" #portfolioFilter  [isClearEnable]="isPortfolioSelected" (clearClick)="fireFilterByPortfolio('')">
+            <app-basic-select  class="px-5 block" [emitPassedValue]="false" [options]="portfolios$ | async"
+              [config]="PortfoliosConfig" [disable]="!isClientSelected" (optionsChange)="fireFilterByPortfolio($event); portfolioFilter.menu.closeMenu();" label="Filter by Portfolio">
+            </app-basic-select></app-filter-menu>
+
+            <app-filter-menu label="Platform" #teamFilter  [isClearEnable]="isTeamSelected" (clearClick)="fireFilterByTeam('')">
+            <app-basic-select  class="px-5 block" [disable]="!isPortfolioSelected" [emitPassedValue]="false" [options]="teams$ | async" [config]="TeamsConfig"
+              (optionsChange)="fireFilterByTeam($event); teamFilter.menu.closeMenu();" label="Filter by Platform">
+            </app-basic-select></app-filter-menu>
+          </ng-container>
+          <button (click)="resetFilter()" mat-button color="warn"
+            aria-label="Clear Filter" >
+            Clear
+          </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <app-table-internal-clients-management></app-table-internal-clients-management>
+      </ng-container>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

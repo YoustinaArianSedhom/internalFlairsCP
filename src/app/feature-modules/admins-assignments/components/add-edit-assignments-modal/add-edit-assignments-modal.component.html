@@ -1,0 +1,57 @@
+<app-form-modal>
+   <h2 mat-dialog-title class="border-b pb-3">ADD / Edit Assignment</h2>
+
+   <mat-dialog-content class="custom-scrolling ">
+      <form [formGroup]="adminAssignmentForm" (focus)="$event.preventDefault()">
+         <section class="flex flex-wrap px-3">
+            <div class="flex justify-between items-center w-full">
+               <p class="font-bold flex-30">External Admin</p>
+               <mat-form-field class="flex-70">
+                  <mat-label>Choose an External Admin</mat-label>
+                  <mat-select formControlName="clientProfileId" (selectionChange)="onExternalAdminChange($event)"
+                     panelClass="custom-scrolling">
+                     <mat-option *ngFor="let admin of externalAdmins" [value]="admin.id">
+                        {{admin.fullName}} - {{admin.clientEmail}}
+                     </mat-option>
+                  </mat-select>
+                  <mat-error>
+                     <app-validation-error [control]="formControls?.clientProfileId" businessName="External Admin">
+                     </app-validation-error>
+                  </mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="flex justify-between items-center w-full">
+               <p class="font-bold flex-30">Internal Admin</p>
+               <mat-form-field class="flex-70">
+                  <mat-label>Choose an Internal Admin</mat-label>
+                  <mat-select formControlName="profileId" (selectionChange)="onInternalAdminChange($event)"
+                     panelClass="custom-scrolling">
+                     <mat-option *ngFor="let admin of internalAdmins"  [value]="admin.id">
+                        {{admin.fullName}} - {{admin.organizationEmail}}
+                     </mat-option>
+                  </mat-select>
+                  <mat-error>
+                     <app-validation-error [control]="formControls?.profileId" businessName="Internal Admin">
+                     </app-validation-error>
+                  </mat-error>
+               </mat-form-field>
+            </div>
+            <div class="hint">
+               <span class="text-red-500">Hint: Assignments addition/update will be effective starting from tomorrow[UTC time]</span>
+            </div>
+         </section>
+      </form>
+   </mat-dialog-content>
+
+   <mat-dialog-actions align="end">
+      <div class="justify-between flex">
+         <button mat-button mat-dialog-close (click)="cancel()" class="cancel-btn rounded-none" cdkFocusInitial>
+            Cancel
+         </button>
+         <button mat-button [disabled]="adminAssignmentForm.invalid" class="action-btn rounded-none" (click)="submit()">
+            Submit
+         </button>
+      </div>
+   </mat-dialog-actions>
+</app-form-modal>

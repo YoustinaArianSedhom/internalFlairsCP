@@ -1,0 +1,118 @@
+
+
+
+$success_snack_bar_head_color: var(--primary-color);
+$success_snack_bar_Message_color: var(--accent-color);
+
+
+// Variations
+$success_snack_bar_color: var(--success);
+$error_snack_bar_color: var(--danger);
+$attention_snack_bar_color: var(--warn);
+
+.snackbar {
+  text-align: left;
+  padding: .3rem 0;
+  background-color: white; 
+  max-width: 500px;
+  top: 0px;
+  position: relative;
+}
+
+
+// .snackbar:before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 4px;
+//   height: 80%;
+// }
+
+// .snackbar__icon {
+//   position: absolute;
+//   top: 50%;
+//   left: 22px;
+//   transform: translateY(-50%);
+//   width: 1rem;
+//   height: 1rem;
+//   padding: .5rem;
+//   border-radius: 50%;
+//   display: inline-block;
+// }
+
+
+.snackbar__type {
+  font-family: var(--mainFont);
+  text-transform: capitalize;
+  text-align: left;
+  font-size: 14px;
+  color: var(--accentAlt);
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.snackbar--error {
+  .snackbar__type {
+    color: var(--danger);
+  }
+}
+.snackbar--success {
+  .snackbar__type {
+    color: var(--success);
+  }
+}
+
+.snackbar--error {
+  .snackbar__type {
+    color: var(--danger);
+  }
+}
+
+.snackbar__message {
+  font-family: var(--mainFont);
+  font-weight: medium;
+  font-size: 12px;
+  text-align: left;
+  color: var(--accentAlt);
+  text-transform: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  &::first-letter {
+      text-transform: capitalize;
+  }
+}
+
+.snackbar__content {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.snackbar__close {
+  position: absolute;
+  right: 8%;
+  top: 28%;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  fill: #eee;
+  transform: translateY(-50%);
+}
+
+.snackbar--success .snackbar__icon,
+.snackbar--success:before {
+  background-color: $success_snack_bar_color;
+}
+
+.snackbar--error .snackbar__icon,
+.snackbar--error::before {
+  background-color: $error_snack_bar_color;
+}
+
+.snackbar--attention .snackbar__icon,
+.snackbar--attention::before {
+  background: $attention_snack_bar_color;
+}
+

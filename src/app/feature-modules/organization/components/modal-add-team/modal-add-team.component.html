@@ -1,0 +1,154 @@
+<h1 mat-dialog-title>{{ modalTitle }}</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="w-full">
+  <form
+    id="my-form"
+    [formGroup]="AddTeamForm"
+    class="w-full"
+    (ngSubmit)="addTeam(AddTeamForm.value)"
+  >
+    <div class="w-full mt-4">
+      <div class="form-group items-center justify-center mb-4 w-full">
+        <div>
+          <label for="profile" class="block">Name*</label>
+          <mat-form-field appearance="fill" class="w-full">
+            <input
+              type="text"
+              placeholder="Name"
+              aria-label="Text"
+              matInput
+              formControlName="Name"
+              autocomplete="off"
+              type="text"
+            />
+
+            <mat-hint
+              class="text-red-700"
+              *ngIf="
+                AddTeamForm.controls.Name.errors?.required &&
+                AddTeamForm.controls.Name.touched
+              "
+            >
+              This field is requried !
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <label for="profile" class="block">Description</label>
+          <mat-form-field appearance="fill" class="w-full">
+            <textarea matInput formControlName="Description"></textarea>
+            <mat-hint
+              class="text-green-500"
+              *ngIf="AddTeamForm.controls.Description?.value?.length"
+            >
+              {{
+                calculateRemainingChars(
+                  200,
+                  AddTeamForm.controls.Description.value.length
+                )
+              }}
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Account Name</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              [value]="data?.client?.name"
+              autocomplete="off"
+              type="text"
+              maxlength="100"
+              matAutosize
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div class="mb-4">
+          <label for="profile" class="mr-14">Portfolio Name</label>
+          <mat-form-field class="w-full" appearance="fill">
+            <input
+              type="text"
+              aria-label="Text"
+              matInput
+              [value]="data.portfolio.name"
+              autocomplete="off"
+              type="text"
+              maxlength="100"
+              matAutosize
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group w-full">
+          <label for="profile" class="block mb-3">Profile Picture</label>
+          <div class="w-full">
+            <ng-container *ngIf="!profileImage">
+              <input
+                style="display: none"
+                type="file"
+                (change)="uploadProfileImage($event)"
+                accept="image/*"
+                #fileInput
+                (onFileChanged)="onFileChanges($event)"
+                alife-file-to-base64
+              />
+              <button
+                type="button"
+                class="
+                  bg-red-600
+                  m-auto
+                  flex
+                  items-center
+                  justify-center
+                  hover:bg-red-800
+                  text-white
+                  font-bold
+                  py-2
+                  px-4
+                "
+                (click)="fileInput.click()"
+              >
+                Upload Profile Image
+              </button>
+            </ng-container>
+
+            <div class="items-end flex">
+              <img
+                class="w-2/12"
+                [src]="profileImage"
+                *ngIf="profileImage"
+                alt="profile"
+              />
+              <button
+                type="button"
+                *ngIf="profileImage"
+                (click)="removeIamge()"
+              >
+                <mat-icon class="text-red-700" title="Delete Profile Image"
+                  >delete</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+          <p class="mt-3 text-red-700">{{ errorMsg }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close type="button">Close</button>
+  <button
+    form="my-form"
+    mat-raised-button
+    color="warn"
+    type="submit"
+    [disabled]="AddTeamForm.invalid"
+  >
+    {{ modalButton }}
+  </button>
+</mat-dialog-actions>

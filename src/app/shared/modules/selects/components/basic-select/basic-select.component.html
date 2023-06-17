@@ -1,0 +1,21 @@
+<!-- Default Template -->
+<ng-template #defaultOptionTemplate let-option let-idx="index">
+    <div>
+        {{option.name}}
+    </div>
+</ng-template>
+
+<mat-form-field class="w-full">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [disabled]="disable" [placeholder]="config.placeholder" [multiple]="config.multiple"
+        [(ngModel)]='config.value' (selectionChange)="onSelectionChange($event.value)"
+        (openedChange)="openStatusChange.emit($event)">
+        <!-- Options List -->
+        <mat-option *ngFor="let option of options || config.options; index as index" [matTooltip]="option.name"
+            matTooltipPosition='above' [matTooltipDisabled]="option.name.length < 30" [value]="option.id">
+            <ng-container [ngTemplateOutlet]="optionTemplate || defaultOptionTemplate"
+                [ngTemplateOutletContext]="{$implicit: option, index: index}">
+            </ng-container>
+        </mat-option>
+    </mat-select>
+</mat-form-field>

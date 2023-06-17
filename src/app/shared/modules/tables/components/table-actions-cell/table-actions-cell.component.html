@@ -1,0 +1,45 @@
+<ng-container *ngIf="actions.length && record">
+
+
+    <!-- {{config | json}} -->
+
+    <!-- Actions Menu triggers -->
+    <button [disabled]="config?.disableActionsCell ? config.disableActionsCell(record) : false" mat-icon-button style="pointer-events: all;" [matMenuTriggerFor]="actionsMenu"
+        aria-label="Table Actions Menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+
+
+    <!-- Actions Menu -->
+    <mat-menu #actionsMenu="matMenu">
+        <ng-container *ngFor="let action of actions">
+            <button mat-menu-item [hidden]="action.hideCondition ? action.hideCondition(record, column) : false"
+                [disabled]="action.disableCondition ? action.disableCondition(record, column): false"
+                (click)="onActionClick(action, record)">
+
+
+
+                <!-- Action Icon -->
+                <ng-container *ngIf="action.icon">
+
+                    <!-- SVG Icon -->
+                    <mat-icon *ngIf="action.icon.isSVG; else regularIcon" [svgIcon]="action.icon.name"
+                        class="mr-2 {{action.icon.classes}}"></mat-icon>
+
+                    <!-- Regular Icon -->
+                    <ng-template #regularIcon>
+                        <mat-icon *ngIf="action.icon" class="mr-2 {{action.icon.classes}}">{{action.icon.name}}</mat-icon>
+                    </ng-template>
+
+                </ng-container>
+
+
+                {{action.label}}
+            </button>
+
+        </ng-container>
+
+
+    </mat-menu>
+
+</ng-container>

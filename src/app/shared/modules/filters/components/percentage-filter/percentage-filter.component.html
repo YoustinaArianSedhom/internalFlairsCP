@@ -1,0 +1,9 @@
+<!-- Complete Percentage -->
+<div class="col col-lg-3">
+    <mat-form-field>
+        <input matInput type="number" [min]="min" [max]="max" [autocomplete]="autocomplete" [placeholder]="placeholder" [value]="value"
+        (change)="onPercentageValueChange($event)"/>
+        <mat-hint>number between {{min}} - {{max}}</mat-hint>
+    </mat-form-field>
+</div>
+<!--/ Complete Percentage -->

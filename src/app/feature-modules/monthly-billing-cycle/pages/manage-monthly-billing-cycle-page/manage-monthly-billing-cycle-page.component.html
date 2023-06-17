@@ -1,0 +1,12 @@
+<app-inner-page-layout [title]="headInformation.title">
+   <ng-container>
+      <div class="flex justify-end items-center mb-5">
+         <button mat-flat-button color="warn" (click)="exportAsExcel()">
+            <span>Export</span>
+         </button>
+      </div>
+      <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+         <customerPortal-table-monthly-billing-cycles></customerPortal-table-monthly-billing-cycles>
+      </div>
+   </ng-container>
+</app-inner-page-layout>

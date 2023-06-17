@@ -1,0 +1,8 @@
+<ng-container *ngIf="users!.length">
+    <ng-container *ngFor="let user of users">
+        <ssa-card-user-management [record]="user"></ssa-card-user-management>
+    </ng-container>
+    <!-- Pagination -->
+    <app-pagination [config]="pagination" (paginationChange)="firePaginateUsersAction($event)">
+    </app-pagination>
+</ng-container>

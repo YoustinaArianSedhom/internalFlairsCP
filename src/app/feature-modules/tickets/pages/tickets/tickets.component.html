@@ -1,0 +1,98 @@
+<app-inner-page-layout [title]="headInformation.title">
+  <ng-container>
+    <!-- <h1>{{headInformation.title}}</h1>-->
+
+    <div class="inner-wrapper bg-white w-full p-1 lg:p-5">
+      <!-- <div class="bg-white w-3/5 flex mb-7">
+        <div>
+          <img
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+        </div>
+        <div class="bg-white w-full p-4 lg:p-4">
+          <h3>Valsoft</h3>
+          <p>...</p>
+          <h4>Description</h4>
+        </div>
+      </div> -->
+      <!--Search Input And Filters-->
+      <!-- <ssa-cards-wrapper-my-teams></ssa-cards-wrapper-my-teams> -->
+
+      <div>
+        <!-- <div
+          class="
+            flex justify-end items-baseline mb-7
+          "
+        >
+          <button
+            (click)="showFilters = !showFilters"
+            mat-flat-button
+            color="warn"
+            aria-label="Filter Requests"
+            class="iconBtn"
+          >
+            <mat-icon>filter_alt</mat-icon>
+          </button>
+        </div> -->
+        <div class="bg-gray-100 px-5 pt-2 pb-3 mb-7 filterBox">
+          <!-- Filters Inner Wrapper -->
+          <form [formGroup]="ticketForm" (keydown.enter)="$event.preventDefault()"
+            class="md:flex md:justify-between md:items-center">
+            <div class="flex items-center">
+              <mat-icon class="text-gray-400">filter_alt</mat-icon>
+              <app-search-input maxlength="100" [withResult]="false" (searchChange)="fireSearchMyTicketsBySearch($event)" [isMobileScreen]="isMobile"
+                placeholder="Search" [shouldSearchInputUpdate]="resetSearch" class="flex-grow filterBox-search">
+              </app-search-input>
+            </div>
+            <div class="flex md:flex-nowrap flex-wrap justify-end items-baseline">
+              <app-filter-menu #portfolioFilter label="Portfolio"  [isClearEnable]="isPortfolioSelected" (clearClick)="fireFilterByPortfolio(firstPortfolio)">
+                <!--Task Status-->
+                <app-basic-select class="px-5 block" [emitPassedValue]="false" [options]="portfolios$ | async"
+                  [config]="PortfolioSelectConfig" (optionsChange)="fireFilterByPortfolio($event); portfolioFilter.menu.closeMenu();" label="Filter by Portfolio">
+                </app-basic-select>
+              </app-filter-menu>
+        
+              <app-filter-menu #contactFilter label="Contact" [isClearEnable]="ticketForm.value?.contact" (clearClick)="resetContactSearch()">
+                <mat-form-field class="px-5 block" appearance="fill">
+                  <input type="text" placeholder="Search a Contact" aria-label="ContactId" formControlName="contact" matInput
+                    [matAutocomplete]="autoContact" />
+                  <mat-autocomplete #autoContact="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="
+                            fireFilterByContacts($event.option.value.id); contactFilter.menu.closeMenu();
+                          ">
+                    <mat-option *ngFor="let option of Contacts" [value]="option" class="mb-5 p-3 reports">
+                      {{ option.name }}
+                      <div class="text-gray-500 text-sm"></div>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </app-filter-menu>
+        
+              <app-filter-menu #roleFilter label="Role" [isClearEnable]="ticketForm.value?.role" (clearClick)="resetRoleSearch()">
+                <mat-form-field class="px-5 block" appearance="fill">
+                  <input type="text" placeholder="Search a Role" aria-label="roleId" formControlName="role" matInput
+                    [matAutocomplete]="autoRole" />
+                  <mat-autocomplete #autoRole="matAutocomplete" [displayWith]="displayFunction"
+                    (optionSelected)="fireFilterByRoles($event.option.value.name); roleFilter.menu.closeMenu();">
+                    <mat-option *ngFor="let option of Roles" [value]="option" class="mb-5 p-3 reports">
+                      {{ option.name }}
+                      <div class="text-gray-500 text-sm"></div>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </app-filter-menu>
+        
+              <button (click)="clearFilter()" mat-button aria-label="Clear" color="warn" >
+                Clear
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!--Table with its pagination-->
+      <ng-container>
+        <ssa-table-my-tickets></ssa-table-my-tickets>
+      </ng-container>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

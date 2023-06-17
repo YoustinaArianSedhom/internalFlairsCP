@@ -1,0 +1,4 @@
+<customerPortal-tickets *ngIf="isExternalAdmin"> </customerPortal-tickets>
+<customerPortal-tickets-internal
+  *ngIf="isInternalAdmin || isAdmin"
+></customerPortal-tickets-internal>

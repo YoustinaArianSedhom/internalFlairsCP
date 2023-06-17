@@ -1,0 +1,7 @@
+<div class="md:flex-none flex-50">
+    <button mat-button [matMenuTriggerFor]="filterMenu">{{label}} <span *ngIf="count && count!=0" class="filterCount ml-2 text-sm">{{count}}</span> <mat-icon>expand_more</mat-icon></button>
+    <mat-menu #filterMenu="matMenu" [classList]="menuClasses" class="w-full ">
+      <div (click)="stopPropagation($event)"><ng-content></ng-content></div>
+      <div class="border-t border-gray-200 pt-2 flex justify-end px-5" *ngIf="isShowClearBtn"><button (click)="clear($event)" class="flex items-center text-sm" [disabled]="!isClearEnable"><mat-icon class="mat-icon--tiny mat-icon--sm pr-6">close</mat-icon> <span>Clear</span></button></div>
+    </mat-menu>
+  </div>

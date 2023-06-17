@@ -1,0 +1,79 @@
+<app-inner-page-layout>
+  <ng-container>
+    <div>
+      <!-- <h1>Dashboard</h1> -->
+      <h1 class="font-black">
+        Welcome {{ user?.fullName }} to My{{ organization?.name }}!
+      </h1>
+      <div *ngIf="organization; else noResult" class="flex flex-col h-96 ng-star-inserted">
+        <img *ngIf="organization.logoPath && !isAdmin" [src]="organization.logoPath" [alt]="organization.name + ' logo'"
+          class="logo w-1/10 m-auto mb-10" />
+
+        <!-- <img
+          *ngIf="organization.logoPath && !environment.absoluteLogoPath"
+          [src]="'assets/images/flairstechnew.png'"
+          [alt]="organization.name + ' logo'"
+          class="logo w-1/5 m-auto mb-10"
+        /> -->
+
+        <ul class="details-list m-auto bg-white p-5 lg:w-1/2 w-full" *ngIf="!isAdmin">
+          <li *ngIf="organization?.business" class="details-item">
+            <span class="label font-bold mr-2">Business :</span>
+            <span class="value">
+              {{ organization.business }}
+            </span>
+          </li>
+          <li *ngIf="organization?.website" class="details-item pt-3">
+            <span class="label font-bold mr-2">Website :</span>
+            <span class="value">
+              <a class="hovered" target="_blank" href="https://{{ organization.website }}">
+                {{ organization.website }}
+              </a>
+            </span>
+          </li>
+          <li *ngIf="organization?.contactNumber" class="details-item pt-3">
+            <span class="label font-bold mr-2">Contact Number :</span>
+            <a class="value hovered" href="tel:{{ organization.contactNumber }}">
+              {{ organization.contactNumber }}
+            </a>
+          </li>
+          <li *ngIf="organization?.addresses.length" class="details-item pt-3">
+            <span class="label font-bold mr-2">Addresses :</span>
+            <span class="break-words" *ngFor="let address of organization.addresses">
+              {{ address.description }}
+            </span>
+          </li>
+        </ul>
+
+        <div class="flex justify-around mb-5 p-5" *ngIf="Entities && isAdmin">
+          <div class="w-4\12 text-center p-2 cursor-pointer" [routerLink]="['/organization']">
+            <img src="assets/images/Clients.svg" />
+            <h3>{{ Entities.accountsCount }}</h3>
+            <div class="bg-gray-300 p-2">
+              <span class="font-bold">Accounts</span>
+            </div>
+          </div>
+          <div class="w-4\12 text-center p-2">
+            <img src="assets/images/portfolio.svg" />
+            <h3>{{ Entities.portfoliosCount }}</h3>
+            <div class="bg-gray-300 p-2">
+              <span class="font-bold">Portfolios</span>
+            </div>
+          </div>
+          <div class="w-4\12 text-center p-2">
+            <img src="assets/images/team.svg" />
+            <h3>{{ Entities.platformsCount }}</h3>
+            <div class="bg-gray-300 p-2">
+              <span class="font-bold">Platforms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- {{(myOrganization$ | async) | json}} -->
+      </div>
+      <ng-template #noResult>
+        <app-no-result></app-no-result>
+      </ng-template>
+    </div>
+  </ng-container>
+</app-inner-page-layout>

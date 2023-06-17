@@ -1,0 +1,77 @@
+<!-- Incase of no children -->
+
+<a class="pr-0 listItem" mat-list-item  *ngIf="!children && this.clickHandler.observers.length === 0" routerLink="{{link}}" routerLinkActive="selectedItem"
+    [routerLinkActiveOptions]="{ exact: true }" [queryParams]="queries ? queries : null" title="{{label}}"
+    (click)="showLoader()">
+    <ng-container *ngTemplateOutlet="menuItemTemplate"></ng-container>
+    </a>
+
+
+<mat-list-item class="pr-0 listItem" *ngIf="!children && this.clickHandler.observers.length !== 0" 
+ title="{{label}}"  (click)="clickHandler.emit()">
+ <ng-container *ngTemplateOutlet="menuItemTemplate"></ng-container>
+</mat-list-item>
+
+<ng-template #menuItemTemplate>
+    <div class="icon-Hover" title="{{label}}">
+
+        <!-- Material Icon -->
+        <mat-icon *ngIf="materialIcon && materialIcon.isSvg" svgIcon="{{materialIcon.name}}" class="mr-2 matSvgIcon">
+        </mat-icon>
+        <mat-icon *ngIf="materialIcon && !materialIcon.isSvg" class="mr-2 matSvgIcon">{{materialIcon.name}}
+
+        </mat-icon>
+
+
+    </div>
+
+
+
+    <mat-label *ngIf="!iconsOnly" class="w-100 text-left text-capitalize itemLabel"
+        [@openClose]="iconsOnly ? 'closed' : 'open'">
+        {{ this.label }}
+    </mat-label>
+
+</ng-template>
+
+
+<!-- Incase of children -->
+
+<a mat-list-item class="pr-0 listItem subNav wrapper wrapper1" [ngClass]="{'active': !collapsed}" *ngIf="children"
+    (click)="ShowChildren()">
+
+    <span *ngIf="!iconsOnly" class="arrow">
+    </span>
+
+    <div class="icon-Hover" title="{{label}}">
+        <!-- Material Icon -->
+        <mat-icon *ngIf="materialIcon && materialIcon.isSvg" svgIcon="{{materialIcon.name}}" class="mr-2 matSvgIcon">
+        </mat-icon>
+        <mat-icon *ngIf="materialIcon && !materialIcon.isSvg" class="mr-2 matSvgIcon">{{materialIcon.name}}</mat-icon>
+    </div>
+
+    <mat-label *ngIf="!iconsOnly" class="w-100 text-left text-capitalize itemLabel"
+        [@openClose]="iconsOnly ? 'closed' : 'open'">
+        {{ this.label }}
+    </mat-label>
+
+</a>
+
+
+
+
+<a mat-list-item class="pr-0 listItem subItem pl-3" routerLink="{{subNav.link}}" routerLinkActive="selectedItem"
+    [routerLinkActiveOptions]="{ exact: true }" *ngFor="let subNav of children"
+    [queryParams]="subNav.queryParams ? subNav.queryParams: {}" [ngClass]="{'show': !collapsed}" (click)="showLoader()">
+    <div class="icon-Hover" title="{{subNav.label}}">
+        <!-- Material Icon -->
+        <mat-icon *ngIf="subNav.materialIcon && subNav.materialIcon.isSvg" svgIcon="{{subNav.materialIcon.name}}"
+            class="mr-2 matSvgIcon"></mat-icon>
+        <mat-icon *ngIf="subNav.materialIcon && !subNav.materialIcon.isSvg" class="mr-2 matSvgIcon">
+            {{subNav.materialIcon.name}}</mat-icon>
+    </div>
+    <mat-label *ngIf="!iconsOnly" class="w-100 text-left text-capitalize itemLabel"
+        [@openClose]="iconsOnly ? 'closed' : 'open'">
+        {{ subNav?.label }}
+    </mat-label>
+</a>

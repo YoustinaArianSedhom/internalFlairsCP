@@ -1,0 +1,17 @@
+<app-form-modal>
+   <h2 mat-dialog-title class="border-b pb-3 ">PURCHASE ORDER</h2>
+
+   <mat-dialog-content class="custom-scrolling ">
+      <div class="container px-4" *ngIf="(monthPOS$ | async)?.length">
+         <!--__________Table_______________-->
+         <app-table-wrapper [config]="tableConfig" [records$]="monthPOS$">
+         </app-table-wrapper>
+      </div>
+
+   </mat-dialog-content>
+   <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class="cancel-btn rounded-none">
+         Cancel
+      </button>
+   </mat-dialog-actions>
+</app-form-modal>

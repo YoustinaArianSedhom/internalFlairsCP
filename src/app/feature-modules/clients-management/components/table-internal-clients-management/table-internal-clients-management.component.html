@@ -1,0 +1,22 @@
+<ng-container *ngIf="(Admins$ | async)?.length; else noResult">
+  <!--__________Table_______________-->
+  <app-table-wrapper
+    [config]="tableConfig"
+    [records$]="Admins$"
+    (actionTaken)="mapTableAction($event)"
+    [classes]="pagination?.pageSize > 10 ? 'scroll' : 'no-scroll'"
+  >
+  </app-table-wrapper>
+
+  <!--_____________pagination__________-->
+  <!-- Pagination -->
+  <app-pagination
+    [config]="pagination"
+    (paginationChange)="firePaginateAdmins($event)"
+  >
+  </app-pagination>
+</ng-container>
+
+<ng-template #noResult>
+  <app-no-result></app-no-result>
+</ng-template>

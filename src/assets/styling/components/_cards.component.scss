@@ -1,0 +1,46 @@
+.card {
+    border: 1px solid #D9D9D9;
+    border-radius: 9px;
+    width: 90%;
+    display: grid;
+    grid-auto-flow: row;
+    margin:  auto;
+    // grid-template-columns: 1fr auto;
+    padding: 1rem;
+        
+    .general-request-data-with-actions {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr auto;
+        gap: .5rem;
+    
+        .mat-icon-button .mat-button-wrapper>* {
+            vertical-align: baseline;
+        }
+        .request-labels-with-data {
+            display: grid;
+            grid-auto-flow: row;
+            gap: 1.5rem;
+            
+            div {
+                display: grid;
+                grid-auto-flow: column;
+                gap: .5rem;
+                .label {
+                    font-weight: bold;
+                    color: #363636;
+                }
+                .data {
+                    max-width: 215px;
+                    word-break: break-all;
+                }
+            }
+        }
+
+        .user-management-action {
+            color: #575757;
+        }
+    }
+}
+
+

@@ -1,0 +1,28 @@
+<mat-autocomplete class="custom-scrolling" #searchAutoComplete="matAutocomplete"  [displayWith]="displayFn" (optionSelected)="optionSelected($event)">
+  <mat-option *ngFor="let data of filteredList | async"  [value]="data">
+      <mat-checkbox *ngIf="isMultipleSelect" class="px-3 block" [checked]="data.selected" (click)="addItemFun($event, data)">
+          {{ data.fullName ? data.fullName : data.name ? data.name : data[searchFullListProperty] }}
+          <span class="text-gray-400 pl-3 text-sm" *ngIf="data[subProperty]">{{data[subProperty]}}</span>
+        </mat-checkbox>
+        <div class="px-3" *ngIf="!isMultipleSelect" (click)="selectedItem($event, data)">
+          {{ data.fullName ? data.fullName : data.name }}
+          <span class="text-gray-400 pl-3 text-sm" *ngIf="data[subProperty]">{{data[subProperty]}}</span>
+          
+        </div>
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field [class]="'w-full self-center ' + formFieldClasses" [ngClass]="{'disabled': disabledFormControl}">
+  <!-- <mat-label>{{placeHolder}}</mat-label> -->
+  <input matInput type="text"
+  (blur)="validationFun($event.target)"
+  #searchListRef
+  [placeholder]="placeHolder"
+  [matAutocomplete]="searchAutoComplete"
+  [formControl]="searchListControl" maxlength="150">
+
+  <button mat-icon-button matSuffix  (click)="clearSearchField()" *ngIf="searchListControl.value || searchListRef.placeholder !== placeHolder">
+    <mat-icon>close</mat-icon>
+</button>
+<!-- <mat-icon *ngIf="isMultipleSelect || !(isMultipleSelect && searchListControl.value || searchListRef.placeholder !== placeHolder)" matSuffix mat-icon-button
+  class="arrow-down">arrow_drop_down</mat-icon> -->
+</mat-form-field>

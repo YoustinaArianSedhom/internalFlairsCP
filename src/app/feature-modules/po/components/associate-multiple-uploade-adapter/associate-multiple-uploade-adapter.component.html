@@ -1,0 +1,12 @@
+<div class="uploader-wrapper flex flex-col">
+    <ngx-awesome-uploader [adapter]="adapter" [uploadType]="'flat'" [fileMaxCount]="1" [fileMaxSize]=8
+        [fileExtensions]="['xlsx']" [captions]="captions" [showPreviewContainer]="true"
+        (validationError)="onValidationError($event)" (removeSuccess)="onRemoveSuccess()"
+        (fileAdded)="onFileAdded($event)" [accept]="'.xlsx'">
+    </ngx-awesome-uploader>
+
+    <div *ngIf="errorMsg" class="error mt-5 text-red-500 text-center text-sm">
+        {{errorMsg }}
+    </div>
+
+</div>

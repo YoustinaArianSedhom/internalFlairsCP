@@ -1,0 +1,64 @@
+.userNav {
+  // position: absolute;
+  // display: block;
+  width: 30px;
+  height: 30px;
+  // right: 30px;
+  // top: 10px;
+  background: var(--accentAlt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    right: 0;
+    top: 0;
+  }
+}
+.userControl {
+  background: white;
+  min-width: 180px;
+  text-align: center;
+  top: 52px;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: all ease-in-out 0.2s;
+  pointer-events: none;
+  @media screen and (max-width: 768px) {
+    top: 33px;
+  }
+  li:first-of-type {
+    p {
+      margin: 0;
+      font-size: 12px;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+.userControl.isShown {
+  opacity: 1;
+  top: 47px;
+  pointer-events: auto;
+}
+.userControl.isShown li.cursor-pointer:hover {
+  color: var(--primary) !important;
+}
+
+.href {
+  color: inherit;
+  text-decoration: none;
+}
+
+.userImg {
+  max-width: 85%;
+}
+
+.userName {
+  color: black;
+  :hover {
+    color: black;
+  }
+}

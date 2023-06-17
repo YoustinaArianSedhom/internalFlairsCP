@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+	<title>icons8-finish-flag-100</title>
+	<defs>
+		<image  width="92" height="100" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABkBAMAAAD56EqrAAAAAXNSR0IB2cksfwAAAB5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtyhvagAAAAp0Uk5TVuf/40niAEjmVZoRWlsAAABtSURBVHicY2BUIgGYMAiRolyVgRTVSkrkKU+DAYRMGhaxUeWjykeVE1SOVxGS0KjyUeWjygdWOT5Fg72cGVU+qnxwKScW0FQ5iU3mcHSvEgCjykeVjyofVT6qfFQ5SDl4OEeDaOUTQco7iVUOAFDj/TXDS3BtAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="4" y="0" />
+</svg>

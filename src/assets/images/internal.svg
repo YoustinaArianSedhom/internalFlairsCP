@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.118" height="16.975" viewBox="0 0 17.118 16.975">
+  <g id="Group_3253" data-name="Group 3253" transform="translate(14.262 -102)">
+    <g id="Group_3251" data-name="Group 3251" transform="translate(-14.262 102)">
+      <path class="mainPath" id="up-right-from-square-solid" d="M13.81,104.056a1.151,1.151,0,0,0-1.151,1.151v3.453H2.3V98.3H5.754a1.151,1.151,0,1,0,0-2.3H2.3A2.3,2.3,0,0,0,0,98.3v10.358a2.3,2.3,0,0,0,2.3,2.3H12.659a2.3,2.3,0,0,0,2.3-2.3v-3.453A1.15,1.15,0,0,0,13.81,104.056Z" transform="translate(0 -93.986)" fill="#363636"/>
+      <path class="mainPath" id="up-right-from-square-solid-2" data-name="up-right-from-square-solid" d="M11.8,0H6.9a1.151,1.151,0,0,0-.814,1.965L7.58,3.453.337,10.7a1.15,1.15,0,1,0,1.626,1.626l7.243-7.24L10.694,6.57a1.151,1.151,0,0,0,1.964-.816V.863A.862.862,0,0,0,11.8,0Z" transform="translate(17.118 12.659) rotate(180)" fill="#363636"/>
+    </g>
+  </g>
+</svg>

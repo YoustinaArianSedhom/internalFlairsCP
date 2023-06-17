@@ -1,0 +1,30 @@
+// Material Icons Size Customization
+.mat-icon {
+    height: 20px;
+    width: 20px;
+    &--sm {
+      height: 15px !important;
+      width: 15px !important;
+    }
+    &--tiny {
+      font-size: 15px;
+      line-height: 15px;
+      height: 15px;
+      width: 15px;
+    }
+    &-lg {
+      transform: scale(1);
+    }
+    &-1x {
+      transform: scale(1.25);
+    }
+    &-2x {
+      transform: scale(1.5);
+    }
+    &-3x {
+      transform: scale(2);
+    }
+    &-4x {
+      transform: scale(2.5);
+    }
+  }

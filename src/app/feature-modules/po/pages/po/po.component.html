@@ -1,0 +1,34 @@
+<app-inner-page-layout [title]="headInformation.title">
+    <ng-container>
+        
+            <div class="flex justify-end items-center mb-5">
+                <div  class="pr-9" (click)="toggleShowTotalAmount()">
+                    <label class="cursor-pointer">
+                      Show Total Amount
+                    </label>
+                    <mat-icon color="warn" class="cursor-pointer" svgIcon="{{showTotalAmount ? 'unlock' : 'lock'}}"></mat-icon>
+                  </div>
+                <button mat-flat-button color="warn"  (click)="openAddClientModal()" >
+                    Add Purchase Order
+                </button>
+             </div>
+                <!-- Filters Wrapper To Do --> 
+            <div class="bg-white w-full py-1 px-5 my-3 flex justify-between items-center">
+                    <div class="flex items-center flex-grow">
+                        <mat-icon class="text-gray-400">filter_alt</mat-icon>
+                        <app-search-input [withResult]="false" [search]="searchQuery"
+                          (searchChange)="fireSearchFilteredPage($event)" class="filterBox-search flex-grow"
+                          [shouldSearchInputUpdate]="resetSearch"
+                          placeholder="Search by PO number" [isMobileScreen]="isMobile">
+                        </app-search-input>
+                      </div>
+                    <button (click)="resetFilter()" mat-button color="warn" aria-label="Clear Filter">
+                        Clear
+                    </button>
+                </div>     
+            <ng-container>
+                <customerPortal-table-po></customerPortal-table-po>
+            </ng-container>
+        
+    </ng-container>
+</app-inner-page-layout>

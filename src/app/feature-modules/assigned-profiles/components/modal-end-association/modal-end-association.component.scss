@@ -1,0 +1,30 @@
+.matSelectionList {
+  display: flex;
+  &-item{
+    display: inline-flex;
+    width: auto;
+  }
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 1rem;
+ 
+}
+
+.mat-radio-button{
+  padding-right: 1.6875rem;
+}
+
+:host ::ng-deep {
+  .mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text{
+    display: inline-block;
+  }
+  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: red;
+  }
+}
+
+
+
+
+

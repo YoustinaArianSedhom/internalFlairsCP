@@ -1,0 +1,46 @@
+.modeToggler {
+    position: absolute;
+    display: block;
+    width: 90px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #2b2b2b;
+    overflow: hidden;
+    cursor: pointer;
+    right: 0px;
+    transform: scale(0.5);
+
+    &:before,
+    &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+    transition: .5s ease;
+    }
+
+    &:before {
+    background-color: #ffa41b;
+
+    }
+
+    &:after {
+    background-color: #2b2b2b;
+    left: -29px;
+    transform: scale(0.00001);
+    }
+
+    &.isDark {
+        &:before {
+            background-color: #FFF;
+            transform: translateX(40px);
+        }
+        &:after {
+            transform: translateX(60px) scale(1);
+        }
+    }
+}

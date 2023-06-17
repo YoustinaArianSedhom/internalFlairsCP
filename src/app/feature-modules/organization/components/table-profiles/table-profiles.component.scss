@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.side-panel {
+  position: absolute;
+  top: 48%;
+  width: 700px;
+  right: -100%;
+  background-color: white;
+  transform: translateY(-50%);
+  height: auto;
+  /* min-height: 400px; */
+  max-height: 100vh;
+  z-index: 10000;
+  overflow: hidden;
+  //   border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: rgb(100 100 111 / 44%) 0px 7px 29px 0px;
+  transition: 1s ease-in-out;
+}
+
+.side-panel-open {
+  //   animation: open 3s 2s 1 ease-in-out;
+  transition: 1s ease-in-out;
+  right: 0;
+  //   display: none;
+}
+
+.skills-chips {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  text-align: right;
+  float: right;
+  // margin-right: 30px;
+  margin-top: 0px;
+
+  // overflow: hidden;
+  // .mat-chip-list-wrapper {
+  //   height: 40px;
+  //   overflow: hidden;
+  //   justify-content: center;
+  // }
+  .chip {
+    background: #e5e5e5;
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 0rem 0.5rem;
+    font-size: 0.8rem;
+    // max-width: 6rem;
+    overflow: hidden;
+    // text-transform: uppercase;
+    display: inline-block;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+
+    // text-overflow: ellipsis;
+    // &:hover {
+    //   max-width: 100%;
+    //   background: #c9c9c9;
+    // }
+  }
+}
+
+.overall-badge {
+  background: #d13a27;
+  border-radius: 0 0.5rem 0.5rem 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  padding: 0 0.5rem;
+  display: inline-flex;
+  color: white;
+  height: 20px;
+}
+
+.sqaured-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}

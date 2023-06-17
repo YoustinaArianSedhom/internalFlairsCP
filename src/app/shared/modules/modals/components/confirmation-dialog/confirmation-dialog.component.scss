@@ -1,0 +1,100 @@
+
+:host {
+
+}
+
+.content {
+  padding: 10px 26px;
+  min-height: 20vh;
+
+
+  p {
+    color: #333333;
+    font-family: "Segoe UI";
+    border-radius: 0;
+    font-size: 1.5rem;
+      //merna
+      color: #333333;
+      font-family: "Segoe UI";
+      border-radius: 0;
+      font-size: 1.5rem;
+      line-height: normal;
+      text-align: left;
+      word-break: break-word;
+      //merna
+  }
+}
+
+.mat-dialog-title {
+  margin: 0;
+}
+
+header {
+  height: 60px;
+  &:before {
+    content: "";
+    width: 11px;
+    height: 60px;
+    background: #cbcbcb;
+    position: absolute;
+    left: -2rem;
+    top: 0;
+}
+}
+.hint {
+  color: var(--primaryAlt);
+  &.danger{
+    color: var(--danger)
+  }
+}
+
+mat-icon {
+  width: 20px !important;
+}
+
+.ConfirmationDialogData {
+  height: 100%;
+  max-width: 30vw;
+  @media screen and (max-width:1400px){
+    max-width: 40vw;
+  }
+  @media screen and (max-width:1024px){
+    max-width: 60vw;
+  }
+  @media screen and (max-width:767px){
+    max-width: 80vw;
+  }
+  &[class=warn]{
+
+  }
+  &[class=danger],
+  &[class=deactivate],
+  &[class=reject],
+  &[class=disable]{
+    .mat-dialog-title--small {
+      color: var(--danger) !important;
+    }
+    .action-btn {
+      background-color: var(--danger) !important;
+      color: var(--accent) !important;
+      border-color: var(--danger) !important;
+    }
+  }
+  &[class=success],
+  &[class=activate],
+  &[class=approve],
+  &[class=enable]{
+    .mat-dialog-title--small {
+      color: var(--success) !important;
+    }
+    .action-btn {
+      background-color: var(--success) !important;
+      color: var(--accent) !important;
+      border-color: var(--success) !important;
+    }
+  }
+}
+
+
+
+

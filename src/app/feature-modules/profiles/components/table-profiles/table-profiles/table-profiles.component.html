@@ -1,0 +1,144 @@
+<ng-container
+  class="relative hide-overflow"
+  *ngIf="(profiles$ | async)?.length; else noResult"
+>
+  <div class="side-panel p-5" [ngClass]="{ 'side-panel-open': isPanelOpen }">
+    <div class="flex items-center justify-between mb-5" *ngIf="sidePanelData">
+      <div>
+        <div class="flex items-center">
+          <span class="block font-bold text-lg">{{
+            sidePanelData.fullName
+          }}</span>
+          <span
+            *ngIf="sidePanelData.organizationEmail"
+            class="
+              ml-2
+              flex
+              items-center
+              justify-center
+              text-s
+              font-medium
+              text-white
+              px-1
+              rounded
+              bg-green-500
+            "
+          >
+            Employee
+          </span>
+          <span
+            *ngIf="!sidePanelData.organizationEmail"
+            class="
+              ml-2
+              flex
+              items-center
+              justify-center
+              text-s
+              font-medium
+              text-white
+              px-1
+              rounded
+              bg-yellow-500
+            "
+          >
+            Candidate
+          </span>
+        </div>
+        <span
+          *ngIf="sidePanelData.personalEmail"
+          class="font-normal text-sm break-words"
+          ><a href="mailto:{{ sidePanelData.personalEmail }}">
+            {{ sidePanelData.personalEmail }}
+          </a></span
+        >
+      </div>
+
+      <mat-icon class="cursor-pointer" (click)="panelClose()">close</mat-icon>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex items-start justify-between" *ngIf="sidePanelData">
+      <div>
+        <ssa-info-field
+          *ngIf="sidePanelData.organizationEmail"
+          label="Organization Mail :"
+        >
+          <span class="font-normal ml-2 text-sm italic break-words">
+            <a href="mailto:{{ sidePanelData.organizationEmail }}">
+              {{ sidePanelData.organizationEmail }}
+            </a>
+          </span>
+        </ssa-info-field>
+        <ssa-info-field
+          *ngIf="sidePanelData.assignment && sidePanelData.assignment.platform"
+          label="Platform :"
+          [value]="sidePanelData.assignment.platform.name"
+        >
+        </ssa-info-field>
+        <ssa-info-field
+          *ngIf="sidePanelData.manager?.fullName"
+          label="Manager :"
+        >
+          <span
+            class="font-normal ml-2 text-sm italic break-words cursor-pointer"
+            [routerLink]="['/profiles/details', sidePanelData.manager.id]"
+          >
+            <a>
+              {{ sidePanelData.manager?.fullName }}
+            </a>
+          </span>
+        </ssa-info-field>
+
+        <ssa-info-field
+          *ngIf="sidePanelData.skillOverallRatings.length; else noSkills"
+          label="Skills :"
+        >
+          <div class="skills-chips d-flex flex-wrap">
+            <div
+              class="m-1 flex items-center justify-center skillsContainer"
+              *ngFor="let skill of sidePanelData.skillOverallRatings"
+            >
+              <!-- <div class="skillsContainer"> -->
+              <span class="chip">{{ skill.name }}</span>
+              <span class="overall-badge">{{ skill.overallRating }}</span>
+              <!-- </div> -->
+            </div>
+          </div>
+        </ssa-info-field>
+        <ng-template #noSkills>
+          <ssa-info-field label="Skills :" [value]="'N/A'"> </ssa-info-field>
+        </ng-template>
+      </div>
+      <img
+        *ngIf="sidePanelData.profileImageLink"
+        class="sqaured-image"
+        src="{{ sidePanelData.profileImageLink }}"
+      />
+      <img
+        *ngIf="!sidePanelData.profileImageLink"
+        class="sqaured-image"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png"
+      />
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <!--__________Table_______________-->
+  <app-table-wrapper
+    [config]="tableConfig"
+    [records$]="profiles$"
+    (actionTaken)="mapTableAction($event)"
+    [classes]="pagination?.pageSize > 10 ? 'scroll' : 'no-scroll'"
+  >
+  </app-table-wrapper>
+
+  <!--_____________pagination__________-->
+  <!-- Pagination -->
+  <app-pagination
+    [config]="pagination"
+    (paginationChange)="firePaginateMyTeams($event)"
+  >
+  </app-pagination>
+</ng-container>
+
+<ng-template #noResult>
+  <app-no-result></app-no-result>
+</ng-template>

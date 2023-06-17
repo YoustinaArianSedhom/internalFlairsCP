@@ -1,0 +1,122 @@
+<div
+    class=" flex-col items-start justify-center mx-auto my-3 w-11/12 border border-solid border-gray-300 p-4 rounded-lg relative">
+
+    <ssa-info-field label="Name :" [value]="record.fullName"></ssa-info-field>
+
+    <ssa-info-field label="Title :" [value]="record.title"></ssa-info-field>
+
+    <ssa-info-field label="Email :">
+
+        <span class="font-normal ml-2 text-sm italic break-words">
+
+            <a href="mailto:{{record.organizationEmail}}">{{record.organizationEmail}}</a>
+
+        </span>
+
+    </ssa-info-field>
+
+    <ssa-info-field label="Creation Date :" [value]="record.createdDate | date"></ssa-info-field>
+
+    <ng-container *ngIf="record.manager.fullName">
+
+        <ssa-info-field label="Manager :" [value]="record.manager?.fullName"></ssa-info-field>
+
+    </ng-container>
+
+
+
+
+    <div class="inline absolute top-0 right-0">
+
+        <button mat-icon-button style="pointer-events: all;" [matMenuTriggerFor]="actionsMenu"
+            aria-label="Table Actions Menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <!-- Actions Menu -->
+        <mat-menu #actionsMenu="matMenu">
+            <button (click)="openEmployeeRolesForm(record)" mat-menu-item>
+                <mat-icon class="mr-2 rule">rule</mat-icon>
+                Update Permissions
+            </button>
+        </mat-menu>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+    <div class="card">
+        <div class="general-request-data-with-actions">
+            <div class="request-labels-with-data">
+                <div class="created-by-data">
+                    <div class="label">
+                        Name:
+                    </div>
+                    <div class="data">
+                        {{record.fullName}}
+                    </div>
+                </div>
+                <div class="title-data">
+                    <div class="label">
+                        Title:
+                    </div>
+                    <div class="data">
+                        {{record.title}}
+                    </div>
+                </div>
+                <div class="email-data">
+                    <div class="label">
+                        Email:
+                    </div>
+                    <div class="data">
+                        <a href="mailto:{{record.organizationEmail}}">{{record.organizationEmail}}</a>
+                    </div>
+                </div>
+                <div class="creation-date-data">
+                    <div class="label">
+                        Creation Date:
+                    </div>
+                    <div class="data">
+                        {{record.createdDate | date}}
+                    </div>
+                </div>
+                <div class="creators-manager-data">
+                    <div class="label">
+                        Manager:
+                    </div>
+                    <div class="data">
+                        {{record.manager?.fullName}}
+                    </div>
+                </div>
+            </div>
+            <div class="user-management-action">
+                <button mat-icon-button style="pointer-events: all;" [matMenuTriggerFor]="actionsMenu"
+                    aria-label="Table Actions Menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+    
+                
+                <mat-menu #actionsMenu="matMenu">
+                    <button (click)="openEmployeeRolesForm(record)" mat-menu-item>
+                        <mat-icon class="mr-2 rule">rule</mat-icon>
+                        Update Permissions
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+-->

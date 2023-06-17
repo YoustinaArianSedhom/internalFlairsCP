@@ -1,0 +1,32 @@
+<section (clickOutside)="isOpened = false">
+  <div class="userNav cursor-pointer" (click)="isOpened = !isOpened">
+    <img
+      [src]="'../../../../../assets/images/user.svg'"
+      [alt]="user.fullname + '-photo'"
+      class="rounded-3xl userImg"
+    />
+  </div>
+
+  <div [ngClass]="{ isShown: isOpened }" class="userControl shadow-md z-50">
+    <ul>
+      <!-- <li class="p-2 hover:bg-accent cursor-pointer" (click)="isOpened=!isOpened" [routerLink]="[ '/my-profile']">
+                My Profile
+            </li> -->
+      <li class="p-2 userName" (click)="isOpened = !isOpened">
+        <p>
+          Signed In As: <span> {{ user.fullname }}</span>
+        </p>
+      </li>
+      <li class="p-2 hover:bg-accent cursor-pointer">
+        <a
+          [href]=" environment.stsUrl+'/tenants/flairstech/identity/account/manage/changepassword'"
+          class="href"
+          >Change Password</a
+        >
+      </li>
+      <li class="p-2 hover:bg-accent cursor-pointer" (click)="confirmLogout()">
+        Log Out
+      </li>
+    </ul>
+  </div>
+</section>

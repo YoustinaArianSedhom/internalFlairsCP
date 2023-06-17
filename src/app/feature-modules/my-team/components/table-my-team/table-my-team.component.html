@@ -1,0 +1,14 @@
+<ng-container *ngIf="(myTeam$ | async)?.length; else noResult">
+   <!--__________Table_______________-->
+    <app-table-wrapper [config]="tableConfig" [records$]="myTeam$"
+      [classes]="pagination?.pageSize > 10 ? 'scroll' : 'no-scroll'">
+    </app-table-wrapper>
+
+   <!-- Pagination -->
+    <app-pagination [config]="pagination" (paginationChange)="paginateMyTeam($event)">
+    </app-pagination>
+</ng-container>
+
+<ng-template #noResult>
+    <app-no-result></app-no-result>
+</ng-template>

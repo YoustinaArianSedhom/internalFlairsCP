@@ -1,0 +1,77 @@
+<app-form-modal>
+    <h1 mat-dialog-title class="dialog-title text-red-700 border-b-2">{{editMode ? 'Edit' : 'Add'}} Discount</h1>
+    <mat-dialog-content class="custom-scrolling ">
+        <form [formGroup]="addDiscountForm">
+
+            <div class="form-group lg:w-9/12 py-1">
+                <p class="mr-2">Resource Name</p>
+
+                <input type="text" formControlName="resourceName" class="input-border text-gray-400" readonly>
+            </div>
+            <div class="form-group lg:w-9/12 py-1">
+                <p class="mr-2">Monthly billing rate</p>
+
+                <input type="text" formControlName="billingRate" class="input-border text-gray-400" readonly>
+            </div>
+            <div class="form-group lg:w-9/12 py-1">
+                <p class="mr-2">working days</p>
+
+                <input type="text" formControlName="workingDays" class="input-border text-gray-400" readonly>
+            </div>
+            <div class="form-group lg:w-9/12 py-1">
+                <p class="mr-2">Amount of this month</p>
+
+                <input type="text" formControlName="baseAmount" class="input-border text-gray-400" readonly>
+            </div>
+
+
+            <!-- Discount Amount /Discount Percentage -->
+            <div class="flex justify-between items-center lg:w-full my-5">
+                <div class="form-group lg:w-5/12">
+                    <mat-form-field class="w-full gap-x-2 my-0 " appearance="fill">
+                        <mat-label for="discountAmount">Deduct Amount</mat-label>
+                        <input type="number" matInput formControlName="discountAmount"
+                            (input)="changeFlag($event.target,'discountAmountFlag')" />
+                        <mat-error>
+                            <app-validation-error  [control]="addDiscountForm.controls.discountAmount"
+                                businessName="Amount">
+                            </app-validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group lg:w-5/12">
+
+                    <mat-form-field class="w-full gap-x-2" appearance="fill">
+                        <mat-label>Deduct percentage</mat-label>
+                        <input type="number" matInput formControlName="discountPercentage"
+                            (input)="changeFlag($event.target,'discountPercentageFlag')" />
+                            <mat-error>
+                                <app-validation-error  [control]="addDiscountForm.controls.discountPercentage"
+                                    businessName="Percentage">
+                                </app-validation-error>
+                            </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+
+
+        </form>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <div class="justify-between flex">
+            <button mat-flat-button mat-dialog-close class="cancel-btn">
+                Cancel
+            </button>
+
+            <button mat-flat-button [disabled]="addDiscountForm.invalid" class="action-btn" (click)="submit()">
+                Apply
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+
+</app-form-modal>

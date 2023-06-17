@@ -1,0 +1,18 @@
+:host ::ng-deep {
+    .mat-table {
+        max-height: 300px !important;
+        overflow-y: scroll !important;
+
+        @media screen and (max-width: 767px) {
+            min-width: 100vw;
+        }
+
+        @media screen and (max-width: 568px) {
+            min-width: 120vw;
+        }
+
+        @media screen and (max-width: 380px) {
+            min-width: 150vw;
+        }
+    }
+}

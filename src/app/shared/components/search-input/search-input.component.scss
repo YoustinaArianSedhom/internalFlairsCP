@@ -1,0 +1,47 @@
+%search_typo {
+  font-size: 1rem !important;
+  font-weight: 500;
+  font-family: var(--mainFont);
+  color: var(--lightBlack);
+}
+
+
+.search-input__close-icon {
+  font-size: 1rem;
+  position: relative;
+  top: 5px;
+  right: -10px;
+}
+
+:host ::ng-deep {
+  input::-webkit-textfield-decoration-container {
+    text-overflow: ellipsis;
+    width: calc(100% - 25px);
+  }
+
+  .input.mat-input-element {}
+}
+
+.search-input,
+::ng-deep {
+
+  .search-input-wrapper label {
+    @extend %search_typo;
+
+  }
+
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0 0.5rem !important;
+    border-radius: 0 !important;
+  }
+
+  .mat-form-field-prefix .mat-icon,
+  .mat-form-field-suffix .mat-icon {
+    font-size: 150%;
+    line-height: 1;
+    top: -17px;
+    right: 0px;
+    position: absolute;
+  }
+}

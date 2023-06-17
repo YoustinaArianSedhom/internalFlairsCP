@@ -1,0 +1,19 @@
+mat-table.mat-table.scroll {
+  max-height: 70vh;
+  overflow-y: auto !important;
+}
+
+mat-table.mat-table {
+  max-height: 70vh !important;
+  overflow-y: hidden;
+
+  @media screen and (max-height: 770px) {
+    max-height: 65vh !important;
+    overflow-y: auto;
+  }
+
+  @media screen and (max-height: 660px) {
+    max-height: 55vh !important;
+    overflow-y: auto;
+  }
+}

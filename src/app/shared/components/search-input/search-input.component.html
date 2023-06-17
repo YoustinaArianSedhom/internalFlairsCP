@@ -1,0 +1,24 @@
+<!-- Search input -->
+<!-- <div class=""> -->
+<mat-form-field appearance="fill" class=" search-input-wrapper" [ngStyle]=" isMobileScreen && {'width': 'calc(100vw - 5rem)',
+    'margin-left': '1.125rem',
+    'margin-top': '1rem'}">
+    <input tabindex="1" [attr.maxlength]="maxlength" [value]="search" type="search" #searchInput class="search-input" [placeholder]="placeholder"
+        (keyup)="onSearchTermChange($event)" matInput [matTooltip]="searchTooltip" matTooltipPosition="above"
+        matTooltipHideDelay=1000 matTooltipClass="tooltip" />
+    <mat-icon tabindex="1" *ngIf="searchInput.value" class="cursor-pointer" matSuffix
+        (click)="[resetInput(), onSearchChange('')]">clear</mat-icon>
+</mat-form-field>
+<div *ngIf="resultsFor && withResult">
+    Showing results for :
+    <div style="max-width: max-content;" class="flex items-center justify-between p-3 text-primary bg-primaryAlt">
+        <span> {{resultsFor}} </span>
+        <mat-icon tabindex="1" class="search-input__close-icon cursor-pointer text-accentAlt" matSuffix
+            (click)="[resetInput(), onSearchChange('')]">clear</mat-icon>
+    </div>
+</div>
+<!-- <div class="col-2 pl-0 align-self-center searchIcon">
+            <mat-icon tabindex="1" svgIcon="search" class="mat-icon-1x hover-pointer" (click)="triggerChangeEvent()"></mat-icon>
+        </div> -->
+<!-- </div> -->
+<!--/ Search input -->

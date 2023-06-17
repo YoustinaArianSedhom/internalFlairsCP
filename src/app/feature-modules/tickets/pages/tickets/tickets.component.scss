@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep {
+  .mat-form-field-prefix .mat-icon,
+  .mat-form-field-suffix .mat-icon {
+    top: 0;
+    position: relative;
+  }
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    margin-top: 4px;
+  }
+  .mat-form-field-appearance-standard .mat-form-field-flex {
+    padding-top: 0;
+  }
+}

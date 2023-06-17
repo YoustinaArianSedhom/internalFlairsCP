@@ -1,0 +1,30 @@
+:host {
+  display: block;
+
+  ::ng-deep .accordion {
+    .mat-expansion-panel {
+      box-shadow: 0 0 0;
+      border-radius: 0!important;
+      background: transparent;
+      .mat-expansion-indicator{
+        display: none;
+      }
+      .mat-expansion-panel-header{
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .mat-expansion-panel-header-title{
+        & > .remove{display: none;}
+        .add,.remove{
+            color: var(--primary);
+        }
+      }
+      .mat-expanded{
+        .mat-expansion-panel-header-title{
+            & > .remove{display: inline;}
+            & > .add{display: none;}
+          }
+      }
+    }
+  }
+}

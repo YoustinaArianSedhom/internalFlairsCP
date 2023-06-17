@@ -1,0 +1,30 @@
+.ft-link {
+  cursor: pointer;
+  display: inline-block;
+
+  .viewProfile {
+    width: 15px;
+    margin-right: 0px;
+    opacity: 0;
+    transition: all ease-in-out 0.2s;
+  }
+
+  &:hover {
+    .viewProfile {
+      opacity: 1;
+
+      margin-right: 10px;
+    }
+
+    a:before {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+a.disabled {
+  pointer-events: none !important;
+  cursor: default;
+}

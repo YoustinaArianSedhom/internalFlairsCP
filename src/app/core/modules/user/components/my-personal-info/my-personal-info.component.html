@@ -1,0 +1,64 @@
+<div class="infoWrapper bg-gray-100 p-2 lg:p-5 w-full lg:w-2/3 xl:w-1/2 grid gap-y-3">
+    <!-- <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">id : </div>
+        <div class="value">{{ personalInfo.id}}</div>
+    </div> -->
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Full Name : </div>
+        <div class="value">{{ personalInfo.name ? personalInfo.name : 'No Value' }}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Title : </div>
+        <div class="value">{{ personalInfo.title ? personalInfo.title : 'No Value' }}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">National ID : </div>
+        <div class="value">{{ personalInfo.nationalId ? personalInfo.nationalId : 'No Value' }}</div>
+    </div>
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">HR Code : </div>
+        <div class="value">{{ personalInfo.hrCode ? personalInfo.hrCode : 'No Value' }}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Manager : </div>
+        <!-- <a *ngIf="personalInfo.managerName" [routerLink]="[ '/employees/view/', personalInfo.managerId ]" target="_blank">{{personalInfo.managerName}}</a>
+        <div *ngIf="!personalInfo.managerName" class="value">No Manager</div> -->
+        <div class="value">{{ personalInfo.managerName ? personalInfo.managerName : 'No Value' }}</div>
+    </div>
+
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Organization Email : </div>
+        <div class="value">{{ personalInfo.organizationEmail ? personalInfo.organizationEmail : 'No Value' }}</div>
+        <!-- <a href="mailto: {{personalInfo.organizationEmail}}" class="value">{{ personalInfo.organizationEmail ?personalInfo.organizationEmail : 'No Value' }}</a> -->
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Bank Name : </div>
+        <div class="value">{{ personalInfo.bankName ? personalInfo.bankName : 'No Value' }}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Bank Account Name : </div>
+        <div class="value">{{ personalInfo.bankAccountName? personalInfo.bankAccountName : 'No Value'}}</div>
+    </div>
+    
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Bank Account Number : </div>
+        <div class="value">{{ personalInfo.bankAccountNumber? personalInfo.bankAccountNumber : 'No Value'}}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Medical Insurance Number : </div>
+        <div class="value">{{ personalInfo.medicalInsuranceNumber? personalInfo.medicalInsuranceNumber : 'No Value'}}</div>
+    </div>
+
+    <div class="fieldGroup block 3xl:flex">
+        <div class="info font-bold mr-2">Social insurance number : </div>
+        <div class="value">{{ personalInfo.socialInsuranceNumber? personalInfo.socialInsuranceNumber : 'No Value'}}</div>
+    </div>
+
+</div>

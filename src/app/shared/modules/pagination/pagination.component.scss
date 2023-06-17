@@ -1,0 +1,7 @@
+:host ::ng-deep {
+    @media screen and (max-width: 412px){
+        .mat-paginator-range-label {
+            margin: 0 16px 0 16px;
+        }
+    }
+}

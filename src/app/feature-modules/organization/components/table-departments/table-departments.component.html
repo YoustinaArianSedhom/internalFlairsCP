@@ -1,0 +1,15 @@
+<ng-container *ngIf="(records$ | async)?.length; else noResult">
+    <!--__________Table_______________-->
+    <app-table-wrapper
+      [config]="tableConfig"
+      [records$]="records$"
+      (actionTaken)="mapTableAction($event)"
+    >
+    </app-table-wrapper>
+  
+  </ng-container>
+  
+  <ng-template #noResult>
+    <app-no-result></app-no-result>
+  </ng-template>
+  

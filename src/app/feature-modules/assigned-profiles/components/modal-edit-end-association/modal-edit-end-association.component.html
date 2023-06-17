@@ -1,0 +1,84 @@
+<app-form-modal>
+   
+    <h1 mat-dialog-title class="dialog-title border-b-2 pb-5">Edit End Association Data</h1>
+   
+
+    <mat-dialog-content class="custom-scrolling">
+        <form [formGroup]="editEndAssociationForm">
+            <div>
+                <div class="">
+                    <label id="radio-group-label"> Is the employee totally leaving client/product on this end date?</label>
+                    <div class="flex justify-between items-center w-5/12 mb-2.5	mt-5">
+                        <mat-radio-group formControlName="isDoneWithClient" layout="row"
+                            (change)="isDoneWithClientChange($event)" aria-labelledby="radio-group-label" class="flex">
+                            <mat-radio-button *ngFor="let leave of leaveTypes" [value]="leave.id"
+                                class="pb-2 pr-3 md:pr-0">{{leave.name}}</mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+                </div>
+                <div *ngIf="formControls.isDoneWithClient.value"> 
+                <div class="md:flex justify-between items-center">
+
+                    <mat-form-field class=" w-full">
+                        <mat-label>Termination Reason</mat-label>
+                        <mat-select formControlName="terminationReason">
+                            <mat-option value="">--None--</mat-option>
+                            <mat-option *ngFor="let reason of terminationReasons" [value]="reason.id">
+                                {{reason.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <app-validation-error [control]="formControls.terminationReason"
+                                businessName="Termination Reason">
+                            </app-validation-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="flex justify-between items-center pt-3 w-full">
+                    <div class="flex justify-between items-center w-5/12 mb-2.5	">
+                        <mat-radio-group formControlName="voluntaryLeave" layout="row" 
+                         aria-label="Select an option"
+                            class="flex">
+                            <mat-radio-button *ngFor="let reason of VoluntaryLeaves" [value]="reason.id"
+                                class="pb-2 pr-3 md:pr-0">{{reason.name}}</mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+                </div>
+
+                <div class="mt-2 w-full">
+                    <span class="text-base font-bold">Turn Over Type:</span>
+                    <div class="flex justify-between w-full">
+                        <mat-selection-list formControlName="turnoverType" class="w-8/12">
+                            <mat-list-option checkboxPosition="before" [value]="i" 
+                                *ngFor="let turnOver of turnOverTypesArray; let i = index">
+                                {{turnOver.name}}
+                                <mat-icon matListIcon svgIcon="info-circle" matTooltip="{{turnOver.note}}" ></mat-icon>
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+
+        </form>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <div class="justify-between flex">
+            <button mat-flat-button mat-dialog-close class="cancel-btn">
+                Cancel
+            </button>
+
+            <button mat-flat-button [disabled]="editEndAssociationForm.invalid" class="action-btn" (click)="submit()">
+                Apply
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+
+</app-form-modal>

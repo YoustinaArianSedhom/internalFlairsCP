@@ -1,0 +1,61 @@
+:host ::ng-deep {
+
+
+
+  mat-table:not(.custom-table) mat-cell,
+  mat-table:not(.custom-table) mat-header-cell {
+    min-width: 100px;
+    overflow-wrap: anywhere;
+    // padding: 0 0.1rem;
+    font-size: 1rem;
+
+    @media screen and (max-width: 768px) {
+      min-width: 120px;
+    }
+  }
+
+  mat-cell:first-of-type,
+  mat-header-cell:first-of-type,
+  mat-footer-cell:first-of-type {
+    padding-left: 15px;
+  }
+
+  mat-row {
+    border-bottom: 1px solid var(--primaryAlt);
+  }
+}
+
+:host ::ng-deep {
+
+  mat-table.custom-table mat-cell,
+  mat-table.custom-table mat-header-cell {
+    min-width: 100px;
+    overflow-wrap: anywhere;
+    padding: 0 0.1rem;
+    font-size: 1rem;
+
+    @media screen and (min-width: 1551px) {
+      min-width: 150px;
+    }
+
+    @media screen and (max-width: 1550px) {
+      min-width: 150px;
+    }
+
+    @media screen and (max-width: 1300px) {
+      min-width: 120px;
+    }
+  }
+
+  mat-row {
+    border-bottom: 1px solid var(--primaryAlt);
+  }
+}
+
+// .mat-row:nth-child(even) {
+//   background-color: red;
+// }
+
+.mat-row:nth-child(odd) {
+  background-color: #f5f5f5;
+}

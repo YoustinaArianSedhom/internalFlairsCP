@@ -1,0 +1,41 @@
+<div
+  class="
+    bg-primaryAlt
+    flex
+    min-h-screen
+    h-screen
+    lg:h-screen
+    items-center
+    justify-center
+  "
+>
+  <div
+    class="
+      auth-wrapper
+      bg-white
+      h-3/4
+      w-5/6
+      lg:h-1/2 lg:w-1/2
+      grid grid-cols-2
+      shadow-md
+    "
+  >
+    <div class="col-span-2 lg:col-span-1 flex justify-center">
+      <div class="w-full flex flex-col justify-around items-center">
+        <img
+          src="assets/images/org-logo.png"
+          alt="organization-logo"
+          class="w-1/2"
+        />
+        <img
+          src="assets/images/auth-img.PNG"
+          alt="authorization-logo"
+          class="w-1/2 lg:w-3/4"
+        />
+      </div>
+    </div>
+    <div class="col-span-2 lg:col-span-1">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

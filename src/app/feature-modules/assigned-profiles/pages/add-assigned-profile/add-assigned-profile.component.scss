@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep {
+  .mat-form-field-prefix .mat-icon,
+  .mat-form-field-suffix .mat-icon {
+    top: 0;
+    position: relative;
+  }
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    margin-top: 4px;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+  }
+}
+
+.reports {
+  line-height: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.custom-icon {
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+.upload-image {
+  top: -35px;
+  left: 100px;
+  width: 30px;
+  height: 30px;
+  background: transparent url('../../../../../assets/images/upload-image-icon.svg') 0% 0% no-repeat padding-box;
+  opacity: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+:host ::ng-deep {
+
+  .mat-list-base .mat-list-item .mat-list-text,
+  .mat-list-base .mat-list-option .mat-list-text {
+    display: inline-block;
+  }
+
+  .mat-radio-button.mat-accent .mat-radio-inner-circle,
+  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+  .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: red !important;
+  }
+  @media screen and (max-width: 1023px) {
+    .mat-form-field-appearance-fill .mat-form-field-flex{
+      padding: 0.75em 0 0.75em 0;
+    };
+    .contract-field{
+      padding: 0.5rem 0;
+    }
+  };
+  .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-underline::before {
+    background-color: #e5e7eb;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex{
+    padding: 0 0 !important;
+  }
+}
+
+
+.label-text{
+  font-size: 0.7rem;
+  margin: 7px 0 0 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: inherit;
+  font-weight: inherit;
+}
